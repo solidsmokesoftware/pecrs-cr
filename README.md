@@ -1,2 +1,2 @@
 # physicr
-Physicr is a simple set of tools for spatial physics in Crystal
+Physicr is a simple set of tools for 2D spatial physics in Crystal
