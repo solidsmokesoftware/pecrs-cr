@@ -29,8 +29,8 @@ class SpaceList < OpenSpace
         @objects.has! key
     end
 
-    def add(key : Int32, value : Body)
-        @objects.add key, value
+    def add(value : Body)
+        @objects.add value.id, value
     end
 
     def get(key : Int32)
@@ -103,8 +103,8 @@ class SpaceHash < GridSpace
     end
 
     
-    def add(index : Int32, value : Body)
-        @objects.add index, value
+    def add(value : Body)
+        @objects.add value.id, value
         key = scale value.pos.x, value.pos.y
         if !has key
             @grid[key] = Array(Body).new
@@ -112,8 +112,8 @@ class SpaceHash < GridSpace
         @grid[key] << value
     end
 
-    def add!(index : Int32, value : Body)
-        @objects.add index, value
+    def add!(value : Body)
+        @objects.add value.id, value
         @grid[scale(value.pos.x, value.pos.y)] << value
     end
     

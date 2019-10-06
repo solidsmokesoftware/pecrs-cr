@@ -21,8 +21,8 @@ r = Random.new
     p = Vector.new rx, ry
     b = Body.new(i, p, s)
     
-    b1.add i, b
-    s1.add i, b
+    b1.add b
+    s1.add b
 end
 
 100.times do |i|
@@ -32,8 +32,8 @@ end
     p = Vector.new rx, ry
     b = Body.new(i, p, s)
     
-    b2.add i, b
-    s2.add i, b
+    b2.add b
+    s2.add b
 end
 
 
@@ -44,8 +44,8 @@ end
     p = Vector.new rx, ry
     b = Body.new(i, p, s)
     
-    b3.add i, b
-    s3.add i, b
+    b3.add b
+    s3.add b
 end
 
 
