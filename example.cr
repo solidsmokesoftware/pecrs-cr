@@ -1,45 +1,74 @@
+require "benchmark"
 
 require "./physi"
 
+# 400 > 800 for these sizes
 
-a = Rect.new(10, 10, 2, 2)
-b = Rect.new(15, 15, 2, 2)
-c = Rect.new(11, 11, 2, 2)
-d = Rect.new(10, 20, 1, 1)
+b1 = BigWorld.new 400
+b2 = BigWorld.new 400
+b3 = BigWorld.new 400
 
-x = Circle.new(10, 10, 2)
-y = Circle.new(12, 11, 2)
-z = Circle.new(16, 10, 2)
+s1 = SimpleWorld.new
+s2 = SimpleWorld.new
+s3 = SimpleWorld.new
 
-col = Collider.new
+r = Random.new
 
-puts "Rect Collision test"
-puts "A:B = #{col.collide? a, b}"
-puts "A:C = #{col.collide? a, c}"
-puts "A:D = #{col.collide? a, d}"
+10.times do |i|
+    rx = r.rand 100_00
+    ry = r.rand 100_00
+    s = Rect.new 200, 200
+    p = Vector.new rx, ry
+    b = Body.new(i, p, s)
+    
+    b1.add i, b
+    s1.add i, b
+end
 
-puts "Circle Collision test"
-puts "X:Y #{col.collide? x, y}"
-puts "X:Z #{col.collide? x, z}"
+100.times do |i|
+    rx = r.rand 100_00
+    ry = r.rand 100_00
+    s = Rect.new 200, 200
+    p = Vector.new rx, ry
+    b = Body.new(i, p, s)
+    
+    b2.add i, b
+    s2.add i, b
+end
 
-puts "Dist test"
-puts "A:D = #{col.dist a.pos, d.pos}"
-puts "X:Y = #{col.dist x.pos, y.pos}"
-puts "X:Z = #{col.dist x.pos, z.pos}"
 
-puts "Circle-Rect Collision test"
-puts "A:X = #{col.collide? a, x}"
-puts "C:Y = #{col.collide? c, y}"
-puts "A:Z = #{col.collide? a, z}"
+1000.times do |i|
+    rx = r.rand 100_00
+    ry = r.rand 100_00
+    s = Rect.new 200, 200
+    p = Vector.new rx, ry
+    b = Body.new(i, p, s)
+    
+    b3.add i, b
+    s3.add i, b
+end
 
-puts "Object Collision tests"
-puts "A:B = #{a.collide? b}"
-puts "A:C = #{a.collide? c}"
-puts "A:D = #{a.collide? d}"
 
-puts "X:Y #{x.collide? y}"
-puts "X:Z #{x.collide? z}"
+def col_grid_test(s : World)
+    2.times do |o|
+        s.check
+    end
+end
 
-puts "A:X = #{a.collide? x}"
-puts "C:Y = #{c.collide? y}"
-puts "Z:A = #{z.collide? a}"
+
+def col_list_test(s : World)
+    2.times do |o|
+        s.check
+    end
+end
+
+puts "Starting tests"
+
+Benchmark.ips do |bm|
+    bm.report "Grid test Rx10" {col_grid_test b1 }
+    bm.report "Grid test Rx100" {col_grid_test b2 }
+    bm.report "Grid test Rx1000" {col_grid_test b3 }
+    bm.report "List test Rx10" {col_list_test s1 }
+    bm.report "List test Rx100" {col_list_test s2 }
+    bm.report "List test Rx1000" {col_list_test s3 }
+end
