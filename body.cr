@@ -2,7 +2,7 @@ require "./shapes"
 require "./vector"
 
 
-class Body
+class AbsBody
     property id : Int32
     property pos : Vector
     property shape : Shape
@@ -11,8 +11,14 @@ class Body
     end
 end
 
+class StaticBody < AbsBody
+    def initialize(id : Int32, pos : Vector, shape : Shape)
+        super id, pos, shape
+    end
+end
 
-class Mobile < Body
+
+class Body < AbsBody
     property dir : Vector
 
     def initialize(id : Int32, pos : Vector, shape : Shape)
