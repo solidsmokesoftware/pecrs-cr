@@ -1,4 +1,5 @@
-require "./spaces"
+require "./world"
+require "./colliders"
 
 struct Collision
     property pos : Point
