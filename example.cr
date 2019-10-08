@@ -18,7 +18,7 @@ r = Random.new
     rx = r.rand 100_00
     ry = r.rand 100_00
     s = Rect.new 200, 200
-    p = Vector.new rx, ry
+    p = Vector.new rx.to_f32, ry.to_f32
     b = Body.new(i, p, s)
     
     b1.add b
@@ -29,7 +29,7 @@ end
     rx = r.rand 100_00
     ry = r.rand 100_00
     s = Rect.new 200, 200
-    p = Vector.new rx, ry
+    p = Vector.new rx.to_f32, ry.to_f32
     b = Body.new(i, p, s)
     
     b2.add b
@@ -41,7 +41,7 @@ end
     rx = r.rand 100_00
     ry = r.rand 100_00
     s = Rect.new 200, 200
-    p = Vector.new rx, ry
+    p = Vector.new rx.to_f32, ry.to_f32
     b = Body.new(i, p, s)
     
     b3.add b
