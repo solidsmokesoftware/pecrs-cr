@@ -12,7 +12,7 @@ class Engine
     property running : Bool
     property objects : PairList(Int32, Body)
     
-    def initialize(rate : Int64)
+    def initialize(rate : Float32)
         @clock = Clock.new rate
         @running = false
         @objects = PairList(Int32, Body).new
@@ -34,8 +34,9 @@ class Engine
     def run(space : Space, collider : Collider)
         spawn do
             while @running
-                if clock.tick
-                    puts "tick #{clock.value}"
+                tick = clock.tick
+                if tick > 0
+                    puts "tick #{tick}"
                     @objects.values.each do |mover|
                         mover.pos = mover.pos + (mover.dir * clock.value.to_i)
                         puts "#{mover.id}: #{mover.pos.x}:#{mover.pos.y}"

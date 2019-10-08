@@ -1,27 +1,28 @@
+require "./fasttime"
 
 
 class Clock
-    property rate : Time::Span
+    property timer : FastTime
+    property rate : Int64
     property value : Int64
-    property last : Time::Span
+    property result : Float32
 
-    def initialize(rate : Int64)
-        #@rate = Time::Span.new(nanoseconds: rate * 10000000)
-        @rate = Time::Span.new(0, 0, 1) #For testing
-
-        @value = 0
-        @last = Time.monotonic
+    def initialize(rate : Float32)
+        @timer = FastTime.new
+        @rate = (1_000_000_000_000 * rate).to_i64
+        @value = 0_i64
+        @result = 0_f32
     end
 
-    def tick
-        results = false
-        current_time = Time.monotonic()
-        if current_time - @last > @rate
-            results = true
-            @last = current_time
-            @value += 1
+    def tick : Float32
+        @value += timer.get
+        if @value > @rate
+            @result = (@value / @rate).to_f32
+            @value = 0_i64
+            @result
+        else
+            0_f32
         end
-
-        results
     end
 end
+

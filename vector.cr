@@ -1,10 +1,10 @@
 
 
 struct Vector
-    property x : Int32
-    property y : Int32
+    property x : Float32
+    property y : Float32
 
-    def initialize(x : Int32, y : Int32)
+    def initialize(x : Float32, y : Float32)
         @x = x
         @y = y
     end
@@ -13,7 +13,7 @@ struct Vector
         Vector.new @x + other.x, @y + other.y
     end
 
-    def +(scalar : Int32)
+    def +(scalar : Float32)
         Vector.new @x + scalar, @y + scalar
     end
 
@@ -25,15 +25,15 @@ struct Vector
         Vector.new @x - other.x, @y - other.y
     end
 
-    def -(scalar : Int32)
+    def -(scalar : Float32)
         Vector.new @x - scalar, @y - scalar
     end
 
-    def *(scalar : Int32)
+    def *(scalar : Float32)
         Vector.new @x * scalar, @y * scalar
     end
 
-    def /(scalar : Int32)
+    def /(scalar : Float32)
         Vector.new @x // scalar, @y // scalar
     end
 
@@ -87,7 +87,7 @@ struct Vector
         end
     end
 
-    def dist_square(x : Int32, y : Int32)
+    def dist_square(x : Float32, y : Float32)
         xd = @x - x
         yd = @y - y
         xd * xd + yd * yd
@@ -97,7 +97,7 @@ struct Vector
         dist_square other.x, other.y
     end
 
-    def dist(x : Int32, y : Int32)
+    def dist(x : Float32, y : Float32)
         Math.sqrt dist_square(x, y)
     end
 
@@ -121,7 +121,7 @@ struct Vector
         other * (dot(other) / other.mag_square)
     end
 
-    def clamp(min : Int32, max : Int32)
+    def clamp(min : Float32, max : Float32)
         if @x < min
             x = min
         elsif @x > max
@@ -141,7 +141,7 @@ struct Vector
         Vector.new x, y
     end
 
-    def move(other : Vector, delta : Int32)
+    def move(other : Vector, delta : Float32)
         distance = Vector.new other.x - @x, other.y - @y
         len = distance.mag
         ## return len <= p_delta || len < CMP_EPSILON ? p_to : v + vd / len * p_delta;

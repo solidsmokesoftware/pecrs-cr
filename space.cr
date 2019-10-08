@@ -74,8 +74,8 @@ class SpaceHash < GridSpace
         @grid = Hash(Tuple(Int32, Int32), Array(Body)).new
     end
 
-    def scale(x : Int32, y : Int32)
-        { (x // @size), (y // @size) }
+    def scale(x : Float32, y : Float32)
+        { (x // @size).to_i32, (y // @size).to_i32 }
     end
 
     #Finds the localtion of value anywhere in the objects
@@ -154,9 +154,9 @@ class SpaceHash < GridSpace
     end
 
     # Get all items *near* a bucket x, y
-    def get(x : Int32, y : Int32, d : Int32)
-        xs = x // @size
-        ys = y // @size
+    def get(x : Float32, y : Float32, d : Int32)
+        xs = (x // @size).to_i32
+        ys = (y // @size).to_i32
         result = Array(Body).new
         
         get({xs-1, ys-1}).each do |i|
