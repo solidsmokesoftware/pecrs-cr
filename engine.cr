@@ -1,19 +1,23 @@
 require "./space"
-require "./colliders"
+require "./collision"
 require "./body"
 
-require "./clock"
+require "./fasttime"
 
 abstract class AbsEngine
 end
 
-class Engine
-    property clock : Clock
+class Engine < AbsEngine
+    property time : Int64
+    property timer : FastTime
+    property rate : Float32
     property running : Bool
     property objects : PairList(Int32, Body)
     
     def initialize(rate : Float32)
-        @clock = Clock.new rate
+        @time = 0_i64
+        @timer = FastTime.new
+        @rate = rate * 10_000
         @running = false
         @objects = PairList(Int32, Body).new
     end
@@ -31,22 +35,45 @@ class Engine
         @running = false
     end
 
+    def step(delta : Float32)
+        @objects.values.size.times do |index|
+            body = @objects.values[index]
+            body.move(delta)
+            #pp "#{index} = #{body.pos.x}:#{body.pos.y}"
+        end
+    end
+
+    def run(space : Space, collider : Collider, n : Int32)
+        timer = @timer
+        rate = @rate
+        value = 0_i64
+        
+        n.times do |i|
+            value += timer.get
+            if value > rate
+                step (value / rate).to_f32
+                collider.check space
+                value = 0_i64
+            end
+        end
+    end
+
     def run(space : Space, collider : Collider)
+        timer = @timer
+        rate = @rate
+        value = 0_i64
+
         spawn do
             while @running
-                tick = clock.tick
-                if tick > 0
-                    puts "tick #{tick}"
-                    @objects.values.each do |mover|
-                        mover.pos = mover.pos + (mover.dir * clock.value.to_i)
-                        puts "#{mover.id}: #{mover.pos.x}:#{mover.pos.y}"
-                    end
-
-                    pp collider.check space
+                value += timer.get
+                if value > rate
+                    step (value / rate).to_f32
+                    collider.check space
+                    value = 0_i64
                 end
-
                 Fiber.yield
             end
         end
     end
+
 end

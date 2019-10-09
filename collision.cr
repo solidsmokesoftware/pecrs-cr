@@ -1,18 +1,36 @@
-
 require "./body"
 require "./shapes"
 require "./space"
 
+struct Collision
+    property value : {Body, Body}
+
+    def initialize(@value)
+    end
+
+    def initialize(a : Body, b : Body)
+        @value = {a, b}
+    end
+
+    def to_s
+        "#{a.id}:#{b.id}"
+    end
+end
 
 abstract class Collider
 end
 
+abstract class NarrowCollider < Collider
+end
 
-class ListCollider < Collider
-    property collider : BodyCollider
+abstract class BroadCollider < Collider
+end
+
+class ListCollider < BroadCollider
+    property collider : LocalCollider
 
     def initialize
-        @collider = BodyCollider.new
+        @collider = LocalCollider.new
     end
 
     def check(space : OpenSpace)
@@ -34,31 +52,32 @@ class ListCollider < Collider
 end
 
 
-class GridCollider < Collider
-    property collider : BodyCollider
+class GridCollider < BroadCollider
+    property collider : LocalCollider
 
     def initialize
-        @collider = BodyCollider.new
+        @collider = LocalCollider.new
     end
 
     def check(space : GridSpace)
-        collisions = Array({Int32, Int32}).new
-
+        collisions = Array(Collision).new
         space.objects.values.each do |body|
             space.get(body.pos.x, body.pos.y, 1).each do |other|
                 if body.id != other.id
                     if @collider.check body, other
-                        collisions << {body.id, other.id}
+                        collisions << Collision.new body, other
+                        body.collision other
                     end
                 end
             end
         end
         collisions
     end
+
 end
 
 
-class ShapeCollider
+class LocalCollider < NarrowCollider
     def dist(x1 : Int32, y1 : Int32, x2 : Int32, y2 : Int32)
         dx = x1 - x2
         dy = y1 - y2
@@ -67,6 +86,14 @@ class ShapeCollider
 
     def dist(s : Vector, o : Vector)
         dist s.x, s.y, o.x, o.y
+    end
+
+    def dist(s : AbsBody, o : AbsBody)
+        dist s.pos.x, s.pos.y, o.pos.x, o.pos.y
+    end
+
+    def check(s : AbsBody, o : AbsBody)
+        check s.shape, s.pos, o.shape, o.pos
     end
 
     def check(s1 : Point, p1 : Vector, s2 : Point, p2 : Vector)
@@ -156,17 +183,6 @@ class ShapeCollider
         else
             false
         end
-    end
-end
-
-
-class BodyCollider < ShapeCollider
-    def dist(s : Body, o : Body)
-        dist s.pos.x, s.pos.y, o.pos.x, o.pos.y
-    end
-
-    def check(s : Body, o : Body)
-        check s.shape, s.pos, o.shape, o.pos
     end
 end
 

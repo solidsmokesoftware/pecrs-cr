@@ -43,8 +43,8 @@ class FastTime
         {% else %}
             def get : Int64
                 if LibC.clock_gettime(LibC::CLOCK_MONOTONIC, out ticks) == 1
-                   #raise Errno.new("clock_gettime(CLOCK_MONOTONIC)")
-                   0_i64
+                   raise Errno.new("clock_gettime(CLOCK_MONOTONIC)")
+                   #0_i64
                 else
                     ticks.tv_nsec
                 end
