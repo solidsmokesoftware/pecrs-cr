@@ -3,7 +3,7 @@ require "math"
 require "./shapes"
 require "./pairlist"
 require "./space"
-require "./colliders"
+require "./collision"
 require "./engine"
 
 

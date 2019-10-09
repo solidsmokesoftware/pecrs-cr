@@ -1,5 +1,5 @@
 require "./space"
-require "./colliders"
+require "./collision"
 require "./body"
 
 require "./fasttime"
