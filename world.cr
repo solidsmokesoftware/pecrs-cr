@@ -8,7 +8,7 @@ require "./engine"
 
 
 abstract class World
-    def add(value : Body)
+    def add(value : AbsBody)
         @space.add value
         @engine.add value
     end
@@ -19,6 +19,14 @@ abstract class World
 
     def start
         @engine.start @space, @collider
+    end
+
+    def stop
+        @engine.stop
+    end
+
+    def run(n : Int32)
+        @engine.run @space, @collider, n
     end
 end
 
@@ -38,7 +46,7 @@ class SimpleWorld < OpenWorld
     def initialize
         @space = SpaceList.new
         @collider = ListCollider.new
-        @engine = Engine.new 1
+        @engine = Engine.new 100
     end
 end
 
@@ -51,7 +59,7 @@ class BigWorld < GridWorld
     def initialize(s : Int32)
         @space = SpaceHash.new s
         @collider = GridCollider.new
-        @engine = Engine.new 1
+        @engine = Engine.new 100
     end
 end
 

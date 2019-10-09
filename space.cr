@@ -15,10 +15,10 @@ end
 
 
 class SpaceList < OpenSpace
-    property objects : PairList(Int32, Body)
+    property objects : PairList(Int32, AbsBody)
 
     def initialize
-        @objects = PairList(Int32, Body).new
+        @objects = PairList(Int32, AbsBody).new
     end
 
     def has(key : Int32)
@@ -29,7 +29,7 @@ class SpaceList < OpenSpace
         @objects.has! key
     end
 
-    def add(value : Body)
+    def add(value : AbsBody)
         @objects.add value.id, value
     end
 
@@ -45,11 +45,11 @@ class SpaceList < OpenSpace
         @objects.get key
     end
 
-    def set(key : Int32, value : Body)
+    def set(key : Int32, value : AbsBody)
         @objects.set key, value
     end
 
-    def set!(index : Int32, value : Body)
+    def set!(index : Int32, value : AbsBody)
         @objects.set! index, value
     end
 
@@ -155,36 +155,45 @@ class SpaceHash < GridSpace
 
     # Get all items *near* a bucket x, y
     def get(x : Float32, y : Float32, d : Int32)
-        xs = (x // @size).to_i32
-        ys = (y // @size).to_i32
+        xs = x.to_i32 // @size
+        ys = y.to_i32 // @size
         result = Array(Body).new
         
-        get({xs-1, ys-1}).each do |i|
-            result << i
+        bucket = get({xs-1, ys-1})
+        bucket.size.times do |i|
+            result << bucket[i]
         end
-        get({xs-1, ys}).each do |i|
-            result << i
+        bucket = get({xs, ys-1})
+        bucket.size.times do |i|
+            result << bucket[i]
         end
-        get({xs, ys-1}).each do |i|
-            result << i
-        end      
-        get({xs, ys}).each do |i|
-            result << i
-        end       
-        get({xs+1, ys}).each do |i|
-            result << i
-        end    
-        get({xs, ys+1}).each do |i|
-            result << i
-        end     
-        get({xs+1, ys+1}).each do |i|
-            result << i
-        end  
-        get({xs-1, ys+1}).each do |i|
-            result << i
-        end     
-        get({xs+1, ys-1}).each do |i|
-            result << i
+        bucket = get({xs-1, ys})
+        bucket.size.times do |i|
+            result << bucket[i]
+        end
+        bucket = get({xs, ys})
+        bucket.size.times do |i|
+            result << bucket[i]
+        end
+        bucket = get({xs+1, ys+1})
+        bucket.size.times do |i|
+            result << bucket[i]
+        end
+        bucket = get({xs, ys+1})
+        bucket.size.times do |i|
+            result << bucket[i]
+        end
+        bucket = get({xs+1, ys})
+        bucket.size.times do |i|
+            result << bucket[i]
+        end
+        bucket = get({xs+1, ys-1})
+        bucket.size.times do |i|
+            result << bucket[i]
+        end
+        bucket = get({xs-1, ys+1})
+        bucket.size.times do |i|
+            result << bucket[i]
         end
         result
     end
