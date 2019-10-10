@@ -46,7 +46,7 @@ class SimpleWorld < OpenWorld
     def initialize
         @space = SpaceList.new
         @collider = ListCollider.new
-        @engine = Engine.new 100
+        @engine = Engine.new 1.0
     end
 end
 
@@ -59,7 +59,7 @@ class BigWorld < GridWorld
     def initialize(s : Int32)
         @space = SpaceHash.new s
         @collider = GridCollider.new
-        @engine = Engine.new 100
+        @engine = Engine.new 1.0
     end
 end
 

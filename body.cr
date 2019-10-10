@@ -13,7 +13,7 @@ class AbsBody
     def collision(other : AbsBody)
     end
 
-    def move(dir : Vector, delta : Float32)
+    def move(dir : Vector, delta : Float64)
     end
 end
 
@@ -37,11 +37,13 @@ class Body < AbsBody
     end
 
     #Faster than move(dir, delta)
-    def move(delta : Float32)
+    def move(delta : Float64)
+        #@pos = @pos.move @dir, delta
         @pos.move @dir, delta
     end
 
-    def move(dir : Vector, delta : Float32)
+    def move(dir : Vector, delta : Float64)
+        #@pos = @pos.move dir, delta
         @pos.move dir, delta
     end
 end

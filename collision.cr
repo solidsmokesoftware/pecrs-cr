@@ -84,6 +84,12 @@ class LocalCollider < NarrowCollider
         Math.sqrt ((dx * dx) + (dy * dy))
     end
 
+    def dist(x1 : Float32, y1 : Float32, x2 : Float32, y2 : Float32)
+        dx = x1 - x2
+        dy = y1 - y2
+        Math.sqrt ((dx * dx) + (dy * dy))
+    end
+
     def dist(s : Vector, o : Vector)
         dist s.x, s.y, o.x, o.y
     end

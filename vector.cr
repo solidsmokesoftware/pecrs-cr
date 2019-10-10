@@ -1,6 +1,6 @@
 
 
-struct Vector
+struct VectorS
     property x : Float32
     property y : Float32
 
@@ -149,7 +149,7 @@ struct Vector
         Vector.new x, y
     end
 
-    def move(other : Vector, delta : Float32)
+    def move(other : Vector, delta : Float64)
         x = @x + other.x * delta
         y = @y + other.y * delta
         Vector.new x, y
@@ -158,7 +158,7 @@ struct Vector
 end
 
 
-class VectorC
+class Vector
     property x : Float32
     property y : Float32
 
@@ -309,9 +309,14 @@ class VectorC
         @y = y
     end
 
-    def move(dir : Vector, delta : Float32)
-        @x += dir.x * delta
-        @y += dir.y * delta
+    def move(dir : Vector, delta : Float64)
+      @x += dir.x * delta
+      @y += dir.y * delta
    end
+
+  def move(dir : Vector)
+    @x += dir.x
+    @y += dir.y
+  end
 end
 

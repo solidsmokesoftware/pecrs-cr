@@ -4,71 +4,60 @@ require "./physi"
 
 # 400 > 800 for these sizes
 
-b1 = BigWorld.new 400
-b2 = BigWorld.new 400
-b3 = BigWorld.new 400
+bw1 = BigWorld.new 400
+bw2 = BigWorld.new 400
 
-s1 = SimpleWorld.new
-s2 = SimpleWorld.new
-s3 = SimpleWorld.new
+sw1 = SimpleWorld.new
+sw2 = SimpleWorld.new
 
 r = Random.new
 
 10.times do |i|
-    rx = r.rand 100_00
-    ry = r.rand 100_00
+    rxp = r.rand 100_00
+    ryp = r.rand 100_00
+    rxd = (r.rand 20) - 10
+    ryd = (r.rand 20) - 10
     s = Rect.new 200, 200
-    p = Vector.new rx.to_f32, ry.to_f32
+    p = Vector.new rxp.to_f32, ryp.to_f32
+    d = Vector.new rxd.to_f32, ryd.to_f32
     b = Body.new(i, p, s)
+    b.dir = d
+
+    p1 = Vector.new rxp.to_f32, ryp.to_f32
+    d1 = Vector.new rxd.to_f32, ryd.to_f32
+    b1 = Body.new(i, p1, s)
+    b1.dir = d1
     
-    b1.add b
-    s1.add b
+    bw1.add b
+    sw1.add b1
 end
 
 100.times do |i|
-    rx = r.rand 100_00
-    ry = r.rand 100_00
+    rxp = r.rand 100_00
+    ryp = r.rand 100_00
+    rxd = (r.rand 20) - 10
+    ryd = (r.rand 20) - 10
     s = Rect.new 200, 200
-    p = Vector.new rx.to_f32, ry.to_f32
+    p = Vector.new rxp.to_f32, ryp.to_f32
+    d = Vector.new rxd.to_f32, ryd.to_f32
     b = Body.new(i, p, s)
+    b.dir = d
+
+    p1 = Vector.new rxp.to_f32, ryp.to_f32
+    d1 = Vector.new rxd.to_f32, ryd.to_f32
+    b1 = Body.new(i, p1, s)
+    b1.dir = d1
     
-    b2.add b
-    s2.add b
+    bw2.add b
+    sw2.add b1
 end
 
-
-1000.times do |i|
-    rx = r.rand 100_00
-    ry = r.rand 100_00
-    s = Rect.new 200, 200
-    p = Vector.new rx.to_f32, ry.to_f32
-    b = Body.new(i, p, s)
-    
-    b3.add b
-    s3.add b
-end
-
-
-def col_grid_test(s : World)
-    2.times do |o|
-        s.check
-    end
-end
-
-
-def col_list_test(s : World)
-    2.times do |o|
-        s.check
-    end
-end
 
 puts "Starting tests"
 
 Benchmark.ips do |bm|
-    bm.report "Grid test Rx10" {col_grid_test b1 }
-    bm.report "Grid test Rx100" {col_grid_test b2 }
-    bm.report "Grid test Rx1000" {col_grid_test b3 }
-    bm.report "List test Rx10" {col_list_test s1 }
-    bm.report "List test Rx100" {col_list_test s2 }
-    bm.report "List test Rx1000" {col_list_test s3 }
+    bm.report "Grid test Rx10" {bw1.run 1000 }
+    bm.report "Grid test Rx100" {bw2.run 1000 }
+    bm.report "List test Rx10" {sw1.run 1000 }
+    bm.report "List test Rx100" {sw2.run 1000 }
 end
