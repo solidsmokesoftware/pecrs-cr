@@ -8,19 +8,23 @@ class Point < Shape
 end
 
 
-class Rect < Shape
-    property w : Int32
-    property h : Int32
+# class Line < Shape
+# end
 
-    def initialize(@w, @h)
-    end
+
+class Rect < Shape
+  property w : Int32
+  property h : Int32
+
+  def initialize(@w, @h)
+  end
 end
 
 
 class Circle < Shape
-    property r : Int32
+  property r : Int32
 
-    def initialize(@r)
-    end
+  def initialize(@r)
+  end
 end
 
