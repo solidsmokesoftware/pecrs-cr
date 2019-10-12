@@ -7,59 +7,45 @@ require "./collision"
 require "./engine"
 
 
-abstract class World
-    def add(value : AbsBody)
-        @space.add value
-        @engine.add value
-    end
+abstract class AbsWorld
+  def add(value : AbsBody)
+    @space.add value
+    @engine.add value
+  end
 
-    def check
-        @collider.check @space
-    end
+  def check
+    @collider.check @space
+  end
 
-    def start
-        @engine.start @space, @collider
-    end
+  def start
+    @engine.start
+  end
 
-    def stop
-        @engine.stop
-    end
+  def stop
+    @engine.stop
+  end
 
-    def run(n : Int32)
-        @engine.run @space, @collider, n
-    end
-end
+  def run(n : Int32)
+    @engine.run n
+  end
 
+  def test(n : Int32)
+    @engine.test n
+  end
 
-class OpenWorld < World
-end
-
-class GridWorld < World
-end
+end#class
 
 
-class SimpleWorld < OpenWorld
-    property space : SpaceList
-    property collider : ListCollider
-    property engine : Engine
-
-    def initialize
-        @space = SpaceList.new
-        @collider = ListCollider.new
-        @engine = Engine.new 1.0
-    end
-end
-
-
-class BigWorld < GridWorld
-    property space : SpaceHash
-    property collider : GridCollider
-    property engine : Engine
+class World < AbsWorld
+  property space : Space
+  property collider : SpaceCollider
+  property engine : Engine
     
-    def initialize(s : Int32)
-        @space = SpaceHash.new s
-        @collider = GridCollider.new
-        @engine = Engine.new 1.0
-    end
-end
+  def initialize(s : Int32)
+    @space = Space.new s
+    @collider = SpaceCollider.new
+    @engine = Engine.new @space, @collider, 16_i64
+  end
+
+end#class
 

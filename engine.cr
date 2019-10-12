@@ -8,83 +8,96 @@ abstract class AbsEngine
 end
 
 class Engine < AbsEngine
-    property time : Int64
-    property timer : FastTime
-    property rate : Int64
-    property running : Bool
-    property objects : PairList(Int32, Body)
+  property space : Space
+  property collider : SpaceCollider
+  property objects : PairList(Int32, Body)
+  property timer : FastTime
+  property running : Bool
+  property rate : Int64
+  property time : Int64
     
-    def initialize(rate : Float64)
-        @time = 0_i64
-        @timer = FastTime.new
-        @rate = (rate * 1_000_000_000).to_i64
-        @running = false
-        @objects = PairList(Int32, Body).new
-    end
+  def initialize(space : Space, collider : SpaceCollider, rate : Int64)
+    @space = space
+    @collider = collider
+    @rate = rate * 1_000_000_000_i64
+    
+    @objects = PairList(Int32, Body).new
+    @timer = FastTime.new
+    @running = false
+    @time = 0_i64
+  end
 
+  def add(body : Body)
+    @objects.add body.id, body
+  end
 
-    def initialize(rate : Int64)
-        @time = 0_i64
-        @timer = FastTime.new
-        @rate = rate
-        @running = false
-        @objects = PairList(Int32, Body).new
-    end
+  def start
+    @running = true
+    run space, collider
+  end
 
-    def add(body : Body)
-        @objects.add body.id, body
-    end
+  def stop
+    @running = false
+  end
 
-    def start(space : Space, collider : Collider)
-        @running = true
-        run space, collider
-    end
-
-    def stop
-        @running = false
-    end
-
-    def step(delta : Float64)
-        @objects.values.size.times do |index|
-            body = @objects.values[index]
-            body.move(delta)
-            pp "#{index} = #{body.pos.x}:#{body.pos.y}"
-        end
-    end
-
-    def run(space : Space, collider : Collider, n : Int32)
-        timer = @timer
-        rate = @rate
-        value = 0_i64
+  def step(delta : Float64)
+    @objects.values.size.times do |index|
+      body = @objects.values[index]
+      body.move(delta)
         
-        n.times do |i|
-            value += timer.get
-            if value > rate
-                delta = (value / rate).to_f64
-                step delta
-                collider.check space
-                puts "#{i}: #{delta}"
-                value = 0_i64
-            end
-        end
+      pp "#{index} = #{body.pos.x}:#{body.pos.y}"
     end
+    @collider.check @space #This should be either two calls or two actions
+  end
 
-    def run(space : Space, collider : Collider)
-        timer = @timer
-        rate = @rate
+  def test(delta : Float64)
+  end
+
+  def run(n : Int32)
+    value = 0_i64
+    i = 0
+
+    while i < n 
+      value += @timer.get
+      if value > rate
+        delta = (value / rate).to_f64
+        step delta
         value = 0_i64
-
-        spawn do
-            while @running
-                value += timer.get
-                if value > rate
-                    step (value / rate).to_f64
-                    collider.check space
-                    value = 0_i64
-                end
-                Fiber.yield
-            end
-        end
+        i += 1
+      end
     end
+  end
 
-end
+  def test(n : Int32)
+    value = 0_i64
+    i = 0
+
+    while i < n 
+      value += @timer.get
+      if value > rate
+        delta = (value / rate).to_f64
+        test delta
+        value = 0_i64
+        i += 1
+      end
+    end
+  end
+
+  def run
+    value = 0_i64
+    spawn do
+      while @running 
+        value += @timer.get
+        if value > rate
+          delta = (value / rate).to_f64
+          test delta
+          value = 0_i64
+          @time += 1
+        end
+        Fiber.yield
+      end
+    end
+  end
+
+end#class
+
