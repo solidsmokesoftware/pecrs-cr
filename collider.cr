@@ -1,13 +1,6 @@
 require "./body"
-require "./shapes"
+require "./shape"
 require "./space"
-
-#TODO/Working on
-#Adding bucket switching in the hashmap
-#Optimizing the hashmap by looping through buckets together to avoid recalcuating area and to reduce bucket lookups
-#ie 1 lookup per bucket instead of 1 lookup per body
-#Need to manage the spatial hash to keep it sparce, delete keys:values when empty 
-#OR keep a list of occupied buckets, think that might be better
 
 
 struct Collision
@@ -30,54 +23,7 @@ abstract class AbsCollider
 end
 
 
-abstract class AbsSpaceCollider < AbsCollider
-end
-
-
-abstract class AbsShapeCollider < AbsCollider
-end
-
-
-class SpaceCollider < AbsSpaceCollider 
-  property collider : ShapeCollider
-
-  def initialize
-    @collider = ShapeCollider.new
-  end
-
-  def check(space : AbsSpace)
-    collisions = Array(Collision).new
-    relocations = Array(AbsBody).new
-    
-    space.grid.each do |pair|
-      search_space = space.get!(pair[0], 1)  
-      pair[1].each do |body|
-        if body.area != pair[0]
-          relocations << body
-        end
-
-        search_space.each do |other|
-          if body.id != other.id
-            if @collider.check body, other
-              collisions << Collision.new body, other
-              body.collision other
-            end
-          end
-        end
-      end
-    end
-    puts relocations
-    relocations.each do |body|
-      space.set body, body.area
-    end
-    puts collisions
-    collisions
-  end
-
-end#class
-
-
-class ShapeCollider < AbsShapeCollider
+class Collider < AbsCollider
   def dist(x1 : Int32, y1 : Int32, x2 : Int32, y2 : Int32)
     dx = x1 - x2
     dy = y1 - y2
@@ -200,79 +146,95 @@ class ShapeCollider < AbsShapeCollider
     end
   end
 
+  #Line-Line collision
+  def check(a1 : Vector, a2 : Vector, b1 : Vector, b2 : Vector)
+    a = a1 - a2
+    b = b1 - b2
+
+    cross = a.cross b
+
+    if cross == 0
+      return false
+    end
+    
+    c = a1 - b1
+    t = (c.cross a) / cross
+    if t > 1 || t < 0
+      return false
+    end
+
+    u = (c.cross b) / cross
+    if t > 1 || t < 0
+      return false
+    end
+
+    intersection = a1 + (b * t)
+    return true
+  end
+
+  #Todo line collisions between all the shapes.
+  #Todo later - ULine and URect collisions. Not a high priority.
+
+
+  def check(shape : Point, pos : Vector, shape_other : Line, pos_other : Vector)
+  end
+  def check(shape : Point, pos : Vector, shape_other : ULine, pos_other : Vector)
+  end
+  def check(shape : Point, pos : Vector, shape_other : URect, pos_other : Vector)
+  end
+  def check(shape : Line, pos : Vector, shape_other : Point, pos_other : Vector)
+  end
+  def check(shape : Line, pos : Vector, shape_other : Line, pos_other : Vector)
+  end
+  def check(shape : Line, pos : Vector, shape_other : ULine, pos_other : Vector)
+  end
+  def check(shape : Line, pos : Vector, shape_other : Rect, pos_other : Vector)
+  end
+  def check(shape : Line, pos : Vector, shape_other : URect, pos_other : Vector)
+  end
+  def check(shape : Line, pos : Vector, shape_other : Circle, pos_other : Vector)
+  end
+  def check(shape : ULine, pos : Vector, shape_other : Point, pos_other : Vector)
+  end
+  def check(shape : ULine, pos : Vector, shape_other : Line, pos_other : Vector)
+  end
+  def check(shape : ULine, pos : Vector, shape_other : ULine, pos_other : Vector)
+  end
+  def check(shape : ULine, pos : Vector, shape_other : Rect, pos_other : Vector)
+  end
+  def check(shape : ULine, pos : Vector, shape_other : URect, pos_other : Vector)
+  end
+  def check(shape : ULine, pos : Vector, shape_other : Circle, pos_other :  Vector)
+  end
+  def check(shape : Rect, pos : Vector, shape_other : Line, pos_other : Vector)
+  end
+  def check(shape : Rect, pos : Vector, shape_other : ULine, pos_other : Vector)
+  end
+  def check(shape : Rect, pos : Vector, shape_other : URect, pos_other : Vector)
+  end
+  def check(shape : URect, pos : Vector, shape_other : Point, pos_other : Vector)
+  end
+  def check(shape : URect, pos : Vector, shape_other : Line, pos_other : Vector)
+  end
+  def check(shape : URect, pos : Vector, shape_other : ULine, pos_other : Vector)
+  end
+  def check(shape : URect, pos : Vector, shape_other : Rect, pos_other : Vector)
+  end
+  def check(shape : URect, pos : Vector, shape_other : URect, pos_other : Vector)
+  end
+  def check(shape : URect, pos : Vector, shape_other : Circle, pos_other :  Vector)
+  end
+  def check(shape : Circle, pos : Vector, shape_other : Line, pos_other : Vector)
+  end
+  def check(shape : Circle, pos : Vector, shape_other : ULine, pos_other : Vector)
+  end
+  def check(shape : Circle, pos : Vector, shape_other : URect, pos_other : Vector)
+  end
+
 end#class
 
 
 
-
-
-  # #Line-line collision
-  # def check(shape : Vector, pos : Vector, shape_other : Vector : pos_other : Vector)
-  #   a = pos - shape
-  #   b = pos_other - shape_other
-
-  #   cross = a.cross b
-
-  #   if cross == 0
-  #     return false
-  #   end
-    
-  #   c = shape - shape_other
-  #   t = (c.cross a) / cross
-  #   if t > 1 || t < 0
-  #     return false
-  #   end
-
-  #   u = (c.cross b) / cross
-  #   if t > 1 || t < 0
-  #     return false
-  #   end
-
-  #   intersection = shape + t * b
-  #   return true
-  # end
-
-  # #Line-Line collision alt
-  # def check_alt(shape : Vector, pos : Vector, shape_other : Vector : pos_other : Vector)
-  #   #TODO check
-  #   denom = ((b.X - a.X) * (d.Y - c.Y)) - ((b.Y - a.Y) * (d.X - c.X))
-  #   numer1 = ((a.Y - c.Y) * (d.X - c.X)) - ((a.X - c.X) * (d.Y - c.Y))
-  #   numer2 = ((a.Y - c.Y) * (b.X - a.X)) - ((a.X - c.X) * (b.Y - a.Y))
-
-  #   // Detect coincident lines (has a problem, read below)
-  #   if denom == 0 
-  #     numer1 == 0 && numer2 == 0
-  #   else
-  #     r = numer1 / denom;
-  #     s = numer2 / denom;
-        
-  #     if (r >= 0 && r <= 1) && (s >= 0 && s <= 1)
-  #       true
-  #     else
-  #       false
-  #     end
-  #   end
-  # end
-
-  # #Line-Rect collision
-  # def check(shape : Vector, pos : Vector, shape_other : Rect, pos_other : Vector)
-  #   #TODO check
- 
- 
-#     __device__ float rayBoxIntersect ( float3 rpos, float3 rdir, float3 vmin, float3 vmax )
-#     {
-#    float t[10];
-#    t[1] = (vmin.x - rpos.x)/rdir.x;
-#    t[2] = (vmax.x - rpos.x)/rdir.x;
-#    t[3] = (vmin.y - rpos.y)/rdir.y;
-#    t[4] = (vmax.y - rpos.y)/rdir.y;
-#    t[5] = (vmin.z - rpos.z)/rdir.z;
-#    t[6] = (vmax.z - rpos.z)/rdir.z;
-#    t[7] = fmax(fmax(fmin(t[1], t[2]), fmin(t[3], t[4])), fmin(t[5], t[6]));
-#    t[8] = fmin(fmin(fmax(t[1], t[2]), fmax(t[3], t[4])), fmax(t[5], t[6]));
-#    t[9] = (t[8] < 0 || t[7] > t[8]) ? NOHIT : t[7];
-#    return t[9];
-# }
 
 
 

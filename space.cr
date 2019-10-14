@@ -1,4 +1,5 @@
-
+require "./pairlist"
+require "./collider"
 
 class AbsSpace
 end
@@ -6,12 +7,44 @@ end
 class Space < AbsSpace
   property size : Int32
   property objects : PairList(Int32, AbsBody)
-  property grid : Hash(Tuple(Int32, Int32), Array(AbsBody)) #bodies on the grid can be static or dynamic
-    
+  property grid : Hash(Tuple(Int32, Int32), Array(AbsBody))
+  property collider : Collider
+  
   def initialize(size : Int32)
     @size = size
     @objects = PairList(Int32, AbsBody).new
     @grid = Hash(Tuple(Int32, Int32), Array(AbsBody)).new
+    @collider = Collider.new
+  end
+
+  def check
+    #collisions = Array(Collision).new
+    relocations = Array(AbsBody).new
+    
+    @grid.each do |pair|
+      search_space = get!(pair[0], 1)  
+      
+      pair[1].each do |body|
+        if body.area != pair[0]
+          relocations << body
+        end
+
+        search_space.each do |other|
+          if body.id != other.id
+            if @collider.check body, other
+                #collisions << Collision.new body, other
+              body.collision other
+            end
+          end
+        end
+      end
+    end
+    #puts relocations
+    relocations.each do |body|
+      set body, body.area
+    end
+    #puts collisions
+    #collisions
   end
 
   def scale(x : Float32, y : Float32)
