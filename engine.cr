@@ -1,39 +1,50 @@
 require "./space"
-require "./collision"
+require "./collider"
 require "./body"
-
-require "./fasttime"
+require "./clock"
 
 abstract class AbsEngine
 end
 
 class Engine < AbsEngine
   property space : Space
-  property collider : SpaceCollider
   property objects : PairList(Int32, Body)
-  property timer : FastTime
+  property timer : Ticker
   property running : Bool
   property rate : Int64
   property time : Int64
     
-  def initialize(space : Space, collider : SpaceCollider, rate : Int64)
-    @space = space
-    @collider = collider
+  def initialize(size : Int32, rate : Int64)
+    @space = Space.new size
     @rate = rate * 1_000_000_000_i64
     
     @objects = PairList(Int32, Body).new
-    @timer = FastTime.new
+    @timer = Ticker.new
     @running = false
     @time = 0_i64
   end
 
   def add(body : Body)
     @objects.add body.id, body
+    @space.add body
+  end
+
+  def add(body : StaticBody)
+    @space.add body
+  end
+
+  def del(body : Body)
+  end
+
+  def del(body : StaticBody)
+  end
+
+  def del(id : Int32)
   end
 
   def start
     @running = true
-    run space, collider
+    run
   end
 
   def stop
@@ -45,9 +56,9 @@ class Engine < AbsEngine
       body = @objects.values[index]
       body.move(delta)
         
-      pp "#{index} = #{body.pos.x}:#{body.pos.y}"
+      #pp "#{index} = #{body.pos.x}:#{body.pos.y}"
     end
-    @collider.check @space #This should be either two calls or two actions
+    @space.check
   end
 
   def test(delta : Float64)
@@ -64,6 +75,7 @@ class Engine < AbsEngine
         step delta
         value = 0_i64
         i += 1
+        #puts "Tick: #{i}"
       end
     end
   end

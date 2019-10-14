@@ -1,6 +1,6 @@
 
 
-struct VectorS
+struct Vector
     property x : Float32
     property y : Float32
 
@@ -158,7 +158,7 @@ struct VectorS
 end
 
 
-class Vector
+class VectorC
     property x : Float32
     property y : Float32
 

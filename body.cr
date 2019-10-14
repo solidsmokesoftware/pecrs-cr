@@ -1,4 +1,4 @@
-require "./shapes"
+require "./shape"
 require "./vector"
 
 
