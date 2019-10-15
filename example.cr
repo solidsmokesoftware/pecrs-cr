@@ -3,14 +3,14 @@ require "./physi"
 
 # 400 > 800 for these sizes
 
-esmall = Engine.new 200, 16
-ebig = Engine.new 1600, 16
+esmall = Engine.new 1600, 8
+ebig = Engine.new 1600, 8
 
 r = Random.new
 
 dynamic = 0
 static = 0
-10_000.times do |i|
+1_000.times do |i|
     rxp = r.rand 100_00
     ryp = r.rand 100_00
     rxd = (r.rand 20) - 10
@@ -34,7 +34,7 @@ static = 0
 puts "Mobile bodies: #{dynamic}"
 puts "Static bodies: #{static}"
 
-10_000.times do |i|
+1_000.times do |i|
     rxp = r.rand 100_000_000
     ryp = r.rand 100_000_000
     rxd = (r.rand 20) - 10
@@ -47,13 +47,15 @@ puts "Static bodies: #{static}"
     ebig.add b
 end
 
-# start = Time.monotonic
 puts "Starting tests"
 
-# esmall.run 10
+# start = Time.monotonic
+# n = 1000
+
+# esmall.run n
 
 # fin = Time.monotonic
-# puts "Total: #{fin - start}"
+# puts "Total: #{(fin - start) / n}"
 
 Benchmark.ips do |bm|
     bm.report "Static/Dynamic world test" {esmall.run 100 }
