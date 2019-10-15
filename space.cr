@@ -25,15 +25,17 @@ class Space < AbsSpace
       search_space = get!(pair[0], 1)  
       
       pair[1].each do |body|
-        if body.area != pair[0]
-          relocations << body
-        end
+        if typeof(body) == Body
+          if body.area != pair[0]
+            relocations << body
+          end
 
-        search_space.each do |other|
-          if body.id != other.id
-            if @collider.check body, other
+          search_space.each do |other|
+            if body.id != other.id
+              if @collider.check body, other
                 #collisions << Collision.new body, other
-              body.collision other
+                body.collision other
+              end
             end
           end
         end
