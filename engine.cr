@@ -1,5 +1,5 @@
 require "./space"
-require "./collider"
+#require "./collider"
 require "./body"
 require "./clock"
 
@@ -53,8 +53,7 @@ class Engine < AbsEngine
 
   def step(delta : Float64)
     @objects.values.size.times do |index|
-      body = @objects.values[index]
-      body.move(delta)
+      @objects.values[index].move(delta) # body.move delta
         
       #pp "#{index} = #{body.pos.x}:#{body.pos.y}"
     end
@@ -102,7 +101,7 @@ class Engine < AbsEngine
         value += @timer.get
         if value > rate
           delta = (value / rate).to_f64
-          test delta
+          step delta
           value = 0_i64
           @time += 1
         end
