@@ -12,6 +12,10 @@ class AbsBody
     @area = {0, 0}
   end
 
+  def check(other : AbsBody)
+    @shape.check @pos, other.shape, other.pos
+  end
+
   def collision(other : AbsBody)
   end
 

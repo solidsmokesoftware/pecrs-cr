@@ -1,5 +1,5 @@
 require "./pairlist"
-require "./collider"
+#require "./collider"
 
 class AbsSpace
 end
@@ -8,13 +8,13 @@ class Space < AbsSpace
   property size : Int32
   property objects : PairList(Int32, AbsBody)
   property grid : Hash(Tuple(Int32, Int32), Array(AbsBody))
-  property collider : Collider
+  #property collider : Collider
   
   def initialize(size : Int32)
     @size = size
     @objects = PairList(Int32, AbsBody).new
     @grid = Hash(Tuple(Int32, Int32), Array(AbsBody)).new
-    @collider = Collider.new
+    #@collider = Collider.new
   end
 
   def check
@@ -32,9 +32,10 @@ class Space < AbsSpace
 
           search_space.each do |other|
             if body.id != other.id
-              if @collider.check body, other
+              if body.check other
                 #collisions << Collision.new body, other
                 body.collision other
+
               end
             end
           end
