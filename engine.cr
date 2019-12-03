@@ -1,22 +1,18 @@
+
 require "./space"
-#require "./collider"
-require "./body"
 require "./clock"
 
-abstract class AbsEngine
-end
 
-class Engine < AbsEngine
+class Engine
   property space : Space
-  property objects : PairList(Int32, Body)
   property timer : Ticker
   property running : Bool
   property rate : Int64
   property time : Int64
     
-  def initialize(size : Int32, rate : Int64)
+  def initialize(size, rate)
     @space = Space.new size
-    @rate = rate * 1_000_000_000_i64
+    @rate = rate * 5_500_000_000_000_i64
     
     @objects = PairList(Int32, Body).new
     @timer = Ticker.new
@@ -24,22 +20,20 @@ class Engine < AbsEngine
     @time = 0_i64
   end
 
-  def add(body : Body)
-    @objects.add body.id, body
+  def add(body : AbsBody)
     @space.add body
   end
 
-  def add(body : StaticBody)
-    @space.add body
+  def del(body : AbsBody)
+    @space.del body
   end
 
-  def del(body : Body)
+  def del(id)
+    @objects.delete id
   end
 
-  def del(body : StaticBody)
-  end
-
-  def del(id : Int32)
+  def get(id)
+    return @objects.get id
   end
 
   def start
@@ -49,18 +43,6 @@ class Engine < AbsEngine
 
   def stop
     @running = false
-  end
-
-  def step(delta : Float64)
-    @objects.values.size.times do |index|
-      @objects.values[index].move(delta) # body.move delta
-        
-      #pp "#{index} = #{body.pos.x}:#{body.pos.y}"
-    end
-    @space.check
-  end
-
-  def test(delta : Float64)
   end
 
   def run(n : Int32)
@@ -75,21 +57,6 @@ class Engine < AbsEngine
         value = 0_i64
         i += 1
         #puts "Tick: #{i}"
-      end
-    end
-  end
-
-  def test(n : Int32)
-    value = 0_i64
-    i = 0
-
-    while i < n 
-      value += @timer.get
-      if value > rate
-        delta = (value / rate).to_f64
-        test delta
-        value = 0_i64
-        i += 1
       end
     end
   end
