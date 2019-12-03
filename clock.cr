@@ -58,15 +58,43 @@ class Clock
   property rate : Int64
   property value : Int64
   property time : Int64
+
+  #TODO/Idea right now this is scaled to my system. Need to test on other systems. 
+  #... Might need to test system speed on init and use that to scale the rate 
   
+  #MS scale; 1000 = aprox 1 second
   def initialize(rate : Int64)
     @ticker = Ticker.new
-    @rate = rate * 1_000_000_000_i64
+    @rate = rate * 5_500_000_000_000_i64
     @value = 0_i64
     @time = 0_i64
   end
 
-  def tick : Int64
+  #MS scale; 1000 = aprox 1 second
+  def initialize(rate : Int32)
+    @ticker = Ticker.new
+    @rate = rate.to_i64 * 5_500_000_000_000_i64
+    @value = 0_i64
+    @time = 0_i64
+  end
+
+  #Second scale; 1 = aprox 1 second
+  def initialize(rate : Float64)
+    @ticker = Ticker.new
+    @rate = (rate * 5_050_000_000_000_000_f64).to_i64
+    @value = 0_i64
+    @time = 0_i64
+  end
+
+  #Second scale; 1 = aprox 1 second
+  def initialize(rate : Float32)
+    @ticker = Ticker.new
+    @rate = (rate.to_f64 * 5_050_000_000_000_000_f64).to_i64
+    @value = 0_i64
+    @time = 0_i64
+  end
+
+  def tick! : Int64
     value = @ticker.get
     @value += value
     if @value > @rate
@@ -87,11 +115,11 @@ class Clock
     end
   end
   
-  def delta : Float64
+  def tick : Float64
     @value += @ticker.get
     if @value > @rate
       delta = (@value / @rate).to_f64
-      value = 0_i64
+      @value = 0_i64
       @time += 1
       delta
     else
