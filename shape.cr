@@ -68,9 +68,10 @@ struct Rect < Shape
       pos_other.x < pos.x + @w &&
       pos_other.y > pos.y &&
       pos_other.y < pos.y + @h
-      true
+      puts "Shape: Collision at #{pos.x}:#{pos.y}"
+      return true
     else
-      false
+      return false
     end
   end
 
@@ -80,9 +81,11 @@ struct Rect < Shape
       pos.x + @w > pos_other.x &&
       pos.y < pos_other.y + shape_other.h &&
       pos.y + @h > pos_other.y
-      true
+      puts "Shape: Collision at #{pos.x}:#{pos.y}"
+      return true
     else
-      false
+      puts "Shape: No Collision at #{pos.x}:#{pos.y}"
+      return false
     end
   end
 
@@ -107,9 +110,11 @@ struct Rect < Shape
     dx = pos.x - pos_other.x
     dy = pos.y - pos_other.y
     if dx * dx + dy * dy < shape_other.r * shape_other.r
-      true
+      puts "Shape: Collision at #{pos.x}:#{pos.y}"
+      return true
     else
-      false
+      puts "No Shape: Collision at #{pos.x}:#{pos.y}"
+      return false
     end
   end
 

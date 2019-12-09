@@ -22,34 +22,42 @@ class Space
   end
 
   def step(delta : Float64)
-    #print "step"
+    puts "Space: stepping"
     @mobiles.values.each do |body|
       body.move delta
         
-      #pp "#{index} = #{body.position.x}:#{body.position.y}"
+      puts "Space: #{body.id} - #{body.position.x}:#{body.position.y}"
     end
     check
   end
 
   def check
     #TODO test to see if going through mobile bodies only instead of the grid is faster
+    puts "Space: checking"
 
     collisions = PairList(Int32, Bool).new
     relocations = Array(AbsBody).new
     
     @grid.each do |pair|
+      puts "Space: grid #{pair[0]}"
+      
       search_space = get!(pair[0], 1)  
       vision = ""
       pair[1].each do |body|
-        if typeof(body) == Body
+        puts "Space: searching space #{pair[0]}"
+        if body.is_a? Body
+          puts "Space: #{body.id} is a Body+"
           body.collision = false
           if body.area != pair[0]
             relocations << body
           end
 
           search_space.each do |other|
+            puts "Space: second search #{body.id} vs #{other.id}"
             if body.id != other.id
+              puts "Space: Not self, testing collision"
               if body.check other
+                puts "Space: Collision occured"
                 body.collide other
               end
             end

@@ -1,13 +1,13 @@
 
 
 struct Vector
-    property x : Float32
-    property y : Float32
+  property x : Float32
+  property y : Float32
 
-    def initialize(x : Float32, y : Float32)
-        @x = x
-        @y = y
-    end
+  def initialize(x : Float32, y : Float32)
+    @x = x
+    @y = y
+  end
 
     def +(other : Vector)
         Vector.new @x + other.x, @y + other.y
@@ -154,6 +154,10 @@ struct Vector
         y = @y + other.y * delta
         Vector.new x, y
         ## return len <= p_delta || len < CMP_EPSILON ? p_to : v + vd / len * p_delta;
+    end
+
+    def to_s : String
+        return "#{@x.to_i}:#{@y.to_i}"
     end
 end
 

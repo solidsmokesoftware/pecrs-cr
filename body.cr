@@ -5,21 +5,31 @@ require "./vector"
 class AbsBody
   property id : Int32
   property shape : Shape
-  property pos : Vector
+  property position : Vector
+  property direction : Vector
   property area : Tuple(Int32, Int32)
+  property collision : Bool
 
-  def initialize(@id, @pos, @shape)
+  def initialize(@id, @position, @shape)
+    @direction = Vector.new 0.0, 0.0
     @area = {0, 0}
+    @collision = false
   end
 
   def check(other : AbsBody)
-    @shape.check @pos, other.shape, other.pos
+    @shape.check @position, other.shape, other.position
   end
 
-  def collision(other : AbsBody)
+  def turn
+    @collision = false
   end
 
-  def move(dir : Vector, delta : Float64)
+  def collide(other : AbsBody)
+    puts "AbsBody: Collision"
+    @collision = true
+  end
+
+  def move(direction : Vector, delta : Float64)
   end
 
   def move(delta : Float64)
@@ -33,31 +43,33 @@ end#class
 
 
 class StaticBody < AbsBody
-  def initialize(id : Int32, pos : Vector, shape : Shape)
-    super id, pos, shape
+  def initialize(id : Int32, position : Vector, shape : Shape)
+    super id, position, shape
   end
+
 end#class
   
   
 class Body < AbsBody
-  property dir : Vector
-  
-  def initialize(id : Int32, pos : Vector, shape : Shape)
-    super id, pos, shape
-    @dir = Vector.new 0.0, 0.0
+  def initialize(id : Int32, position : Vector, shape : Shape)
+    super id, position, shape
   end
 
   def collision(other : AbsBody)
-    @dir = Vector.new 0.0, 0.0
+    puts "Body: Collision"
+    @direction = Vector.new 0.0, 0.0
   end
 
-  #Faster than move(dir, delta)
+  #Faster than move(direction, delta)
   def move(delta : Float64)
-    @pos.move @dir, delta
+    @position = @position.move @direction, delta
   end
  
-  def move(dir : Vector, delta : Float64)
-    @pos.move dir, delta
+  def move(direction : Vector, delta : Float64)
+    print "moving #{direction.x}:#{direction.y} x#{delta}"
+    pp @position
+    @position = @position.move direction, delta
+    pp @position
   end
 
 end#class

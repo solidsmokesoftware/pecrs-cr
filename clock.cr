@@ -65,7 +65,7 @@ class Clock
   #MS scale; 1000 = aprox 1 second
   def initialize(rate : Int64)
     @ticker = Ticker.new
-    @rate = rate * 5_500_000_000_000_i64
+    @rate = rate * 150_000_000_000_i64
     @value = 0_i64
     @time = 0_i64
   end
@@ -73,7 +73,7 @@ class Clock
   #MS scale; 1000 = aprox 1 second
   def initialize(rate : Int32)
     @ticker = Ticker.new
-    @rate = rate.to_i64 * 5_500_000_000_000_i64
+    @rate = rate.to_i64 * 150_000_000_000_i64
     @value = 0_i64
     @time = 0_i64
   end
@@ -81,7 +81,7 @@ class Clock
   #Second scale; 1 = aprox 1 second
   def initialize(rate : Float64)
     @ticker = Ticker.new
-    @rate = (rate * 5_050_000_000_000_000_f64).to_i64
+    @rate = (rate * 150_000_000_000_000_f64).to_i64
     @value = 0_i64
     @time = 0_i64
   end
@@ -89,9 +89,13 @@ class Clock
   #Second scale; 1 = aprox 1 second
   def initialize(rate : Float32)
     @ticker = Ticker.new
-    @rate = (rate.to_f64 * 5_050_000_000_000_000_f64).to_i64
+    @rate = (rate.to_f64 * 150_000_000_000_000_f64).to_i64
     @value = 0_i64
     @time = 0_i64
+  end
+
+  def calibrate
+    #TODO later
   end
 
   def tick! : Int64
@@ -101,7 +105,7 @@ class Clock
       @value = 0_i64
       @time += 1
     end
-    value
+    return value
   end
   
   def tick? : Bool
@@ -109,9 +113,9 @@ class Clock
     if @value > @rate
       @value = 0_i64
       @time += 1
-      true
+      return true
     else
-      false
+      return false
     end
   end
   
@@ -121,9 +125,9 @@ class Clock
       delta = (@value / @rate).to_f64
       @value = 0_i64
       @time += 1
-      delta
+      return delta
     else
-      0_f64
+      return 0_f64
     end
   end
 
