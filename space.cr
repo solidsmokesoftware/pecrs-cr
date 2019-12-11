@@ -1,87 +1,119 @@
 require "./pairlist"
 require "./body"
+require "./signal"
 
 class Space
-  property size : Int32
-  property objects : Hash(Int32, AbsBody)
-  property mobiles : PairList(Int32, Body)
-  property statics : PairList(Int32, StaticBody)
-  property grid : Hash(Tuple(Int32, Int32), Array(AbsBody))
+  property objects : Hash(Int32, AbsBody) #All objects in the world space
+  property actors : PairList(Int32, Actor) #Bodies that are being watched
+  property mobiles : PairList(Int32, Body) #Moving objects
+  property statics : PairList(Int32, StaticBody) #Objects that don't move often
+
+  property grid : Hash(Tuple(Int32, Int32), Array(AbsBody)) #spatilhash that is the world space
+  property size : Int32 #Size of each cell in the spatialhash
+
+  #Dunno about this stuff, experimenting
   property vision : Hash(Tuple(Int32, Int32), String)
-  property collisions : Hash(Int32, Bool)
+  property collisions : Signaler(Tuple(Int32, Int32))
+  property relocations : Signaler(Tuple(Int32, Int32))
   
   def initialize(size : Int32)
-    @size = size
     @objects = Hash(Int32, AbsBody).new
+    @actors = PairList(Int32, Actor).new
     @mobiles = PairList(Int32, Body).new
     @statics = PairList(Int32, StaticBody).new
 
     @grid = Hash(Tuple(Int32, Int32), Array(AbsBody)).new
+    @size = size
+
     @vision = Hash(Tuple(Int32, Int32), String).new
-    @collisions = Hash(Int32, Bool).new
+    @collisions = Signaler(Tuple(Int32, Int32)).new
+    @relocations = Signaler(Tuple(Int32, Int32)).new
   end
 
-  def step(delta : Float64)
-    puts "Space: stepping"
-    @mobiles.values.each do |body|
-      body.move delta
-        
-      puts "Space: #{body.id} - #{body.position.x}:#{body.position.y}"
-    end
-    check
+  def scale(x : Float32, y : Float32) : {Int32, Int32}
+    return { (x // @size).to_i32, (y // @size).to_i32 }
   end
+
+  #TODO working on taking this out
+
+  # def step(delta : Float64)
+  #   @mobiles.values.each do |body|
+  #     body.move delta
+  #     area = scale body.position.x, body.position.y
+  #     if body.area != area
+  #       body.area
+  #       set body, area
+  #       #@relocations.signal area
+  #     end
+
+  #     #puts "Space: #{body.id} - #{body.position.x}:#{body.position.y}"
+  #   end
+  #   check
+  # end
+
 
   def check
-    #TODO test to see if going through mobile bodies only instead of the grid is faster
-    puts "Space: checking"
+    spaces = Hash(Tuple(Int32, Int32), Array(AbsBody)).new
+    @actors.values.each do |actor|
+      area = scale actor.position.x, actor.position.y
+      if area != actor.area
+        set actor, area
+      end
 
-    collisions = PairList(Int32, Bool).new
-    relocations = Array(AbsBody).new
-    
-    @grid.each do |pair|
-      puts "Space: grid #{pair[0]}"
+      if spaces.has_key? area
+        others = spaces[area]
+      else
+        others = get area, 1
+        spaces[area] = others
+      end
+      puts "Space: checking #{actor.id}##{actor.position.x}:#{actor.position.y} in #{area[0]}:#{area[1]} against #{others.size} others"
       
-      search_space = get!(pair[0], 1)  
-      vision = ""
-      pair[1].each do |body|
-        puts "Space: searching space #{pair[0]}"
-        if body.is_a? Body
-          puts "Space: #{body.id} is a Body+"
-          body.collision = false
-          if body.area != pair[0]
-            relocations << body
-          end
-
-          search_space.each do |other|
-            puts "Space: second search #{body.id} vs #{other.id}"
-            if body.id != other.id
-              puts "Space: Not self, testing collision"
-              if body.check other
-                puts "Space: Collision occured"
-                body.collide other
-              end
-            end
+      others.each do |other|
+        if actor.id != other.id
+          if actor.check other
+            puts "Space: Collision between #{actor.id} and #{other.id} at #{other.position.x}:#{other.position.y}"
+            actor.collide other
+            other.collide actor
           end
         end
-
-        # elsif typeof(body) == StaticBody
-        # end
-
-        #TODO this needs to be done waaaaay better it's not nice at all
-        vision += "#{body.id}:#{body.position.to_s}/"
       end
-      @vision[pair[0]] = vision
-    end
-
-    #puts relocations
-    relocations.each do |body|
-      set body, body.area
-    end
+    end 
   end
 
-  def scale(x : Float32, y : Float32)
-    { (x // @size).to_i32, (y // @size).to_i32 }
-  end
+  #TODO trying to get rid of this
+  # def check
+  #   #TODO test to see if going through mobile bodies only instead of the grid is faster
+  #   #puts "Space: checking"
+
+  #   @grid.each do |pair| 
+  #     search_space = get!(pair[0], 1)  
+  #     vision = ""
+  #     pair[1].each do |body|
+  #       search_space.each do |other|
+  #         if body.id != other.id
+  #           if body.check other
+  #             body.collide other
+  #             #@collisions.signal({body.id, other.id})
+  #           end
+  #         end
+  #       end
+
+  #       # elsif typeof(body) == StaticBody
+  #       # end
+
+  #       #TODO this needs to be done waaaaay better it's not nice at all
+  #       vision += "#{body.id}:#{body.position.to_s}/"
+  #     end
+  #     @vision[pair[0]] = vision
+  #   end
+
+  #   #TODO figure out why this was kept after the main loop
+  #   # #puts relocations
+  #   # relocations.each do |body|
+  #   #   set body, body.area
+  #   #   body.relocate body.area
+  #   # end
+  # end
 
   #Finds the localtion of body anywhere in the objects
   #TODO: this could be much faster by searching bodies
@@ -95,11 +127,6 @@ class Space
     end
   end
 
-  # Has a bucket x, y : bool
-  def has(x : Int32, y : Int32) : Bool
-    has? scale(x, y)
-  end
-
   # Has a bucket k : bool
   def has(key : {Int32, Int32}) : Bool
     if @grid.has_key? key
@@ -109,242 +136,125 @@ class Space
     end
   end
 
-  def add(body : Body)
+  def add(body : AbsBody)
     @objects[body.id] = body
-    @mobiles.add body.id, body.as(Body)  
-    body.set scale body.position.x, body.position.y
+    
+    if body.is_a? Body
+      @mobiles.add body.id, body # .as(Body) What is this for??  
+    elsif body.is_a? StaticBody
+      @statics.add body.id, body
+    end
+
+    if body.is_a? Actor
+      @actors.add body.id, body
+    end
+
+    body.area = scale body.position.x, body.position.y
+    
     if !has body.area
       @grid[body.area] = Array(AbsBody).new
     end
     @grid[body.area] << body
-  end
 
-  def add!(body : Body)
-    @objects[body.id] = body
-    @mobiles.add body.id, body
-    @objects.add body.id, body
-    @grid[body.area] << body
-  end
-
-  def add(body : StaticBody)
-    @objects[body.id] = body
-    @statics.add body.id, body  
-    body.set scale body.position.x, body.position.y
-    if !has body.area
-      @grid[body.area] = Array(AbsBody).new
-    end
-    @grid[body.area] << body
-  end
-
-  def add!(body : AbsBody)
-    @objects[body.id] = body
-    @statics.add body.id, body
-    @objects.add body.id, body
-    @grid[body.area] << body
-  end
-
-  # Add a bucket directly to the grid's x, y
-  def add!(x : Int32, y : Int32)
-    key = scale x, y
-    add! key
-  end
-
-  # Add a bucket directly to the grid's k
-  def add!(key : {Int32, Int32})
-    @grid[key] = Array(AbsBody).new
-  end
-
-  def get(id : Int32)
-    return @objects[id]
-  end
-
-  # Check and get all items from a bucket x, y
-  def get(x : Int32, y : Int32)
-    key = scale x, y
-    get key
+    puts "Space: Added body #{body.id} to #{body.area[0]}:#{body.area[1]} with #{@grid[body.area].size} others"
   end
 
   # Check and get all items from a bucket k
   def get(key : {Int32, Int32})
-    if !has key
-      add! key
+    if @grid.has_key? key
+      return @grid[key]
+    else
+      bucket = Array(AbsBody).new
+      @grid[key] = bucket
+      return bucket
     end
-    get! key
-  end
-
-  # Directly get all items from a bucket x, y
-  def get!(x : Int32, y : Int32)
-    key = scale x, y
-    get! key
-  end
-
-  # Directly get all items from a bucket k
-  def get!(key : Tuple(Int32, Int32))
-    @grid[key]
-  end
-
-  def set(id : Int32, key : {Int32, Int32})
-    body = @objects.get id
-    @grid[body.area].delete body
-    if @grid[body.area].size == 0
-        del key
-    end
-    body.set key
-    @grid[key] << body
-  end
-
-  #Move a body to a different grid area
-  def set(body : AbsBody, key : {Int32, Int32})
-    @grid[body.area].delete body
-    if @grid[body.area].size == 0
-      del key
-    end
-    body.set key
-    if !has key
-      @grid[key] = Array(AbsBody).new
-    end
-    @grid[key] << body
-  end
-
-  #Move a body to a different grid area
-  def set!(body : AbsBody, key : {Int32, Int32})
-    @grid[body.area].delete body
-    body.set key
-    @grid[key] << body
   end
 
   # Get all items *near* a bucket key. d is a flag for overloading
-  def get!(key : {Int32, Int32}, d : Int32)
+  def get(key : {Int32, Int32}, d : Int32)
     results = Array(AbsBody).new
 
     test_key = {key[0]-1, key[1]-1}
     if @grid.has_key? test_key
-      bucket = @grid[test_key]
-      bucket.size.times do |i|
-        results << bucket[i]
+      @grid[test_key].each do |body|
+        results << body
       end
     end
 
     test_key = {key[0]+1, key[1]-1}
     if @grid.has_key? test_key
-      bucket = @grid[test_key]
-      bucket.size.times do |i|
-        results << bucket[i]
+      @grid[test_key].each do |body|
+        results << body
       end
     end
 
     test_key = {key[0]-1, key[1]+1}
     if @grid.has_key? test_key
-      bucket = @grid[test_key]
-      bucket.size.times do |i|
-        results << bucket[i]
+      @grid[test_key].each do |body|
+        results << body
       end
     end
 
     test_key = {key[0]+1, key[1]+1}
     if @grid.has_key? test_key
-      bucket = @grid[test_key]
-      bucket.size.times do |i|
-        results << bucket[i]
+      @grid[test_key].each do |body|
+        results << body
       end
     end
 
     test_key = {key[0], key[1]-1}
     if @grid.has_key? test_key
-      bucket = @grid[test_key]
-      bucket.size.times do |i|
-        results << bucket[i]
+      @grid[test_key].each do |body|
+        results << body
       end
     end
 
     test_key = {key[0], key[1]+1}
     if @grid.has_key? test_key
-      bucket = @grid[test_key]
-      bucket.size.times do |i|
-        results << bucket[i]
+      @grid[test_key].each do |body|
+        results << body
       end
     end
 
     test_key = {key[0], key[1]-1}
     if @grid.has_key? test_key
-      bucket = @grid[test_key]
-      bucket.size.times do |i|
-        results << bucket[i]
+      @grid[test_key].each do |body|
+        results << body
       end
     end
 
     test_key = {key[0], key[1]+1}
     if @grid.has_key? test_key
-      bucket = @grid[test_key]
-      bucket.size.times do |i|
-        results << bucket[i]
+      @grid[test_key].each do |body|
+        results << body
       end
     end
 
     test_key = {key[0], key[1]}
     if @grid.has_key? test_key
-      bucket = @grid[test_key]
-      bucket.size.times do |i|
-        results << bucket[i]
+      @grid[test_key].each do |body|
+        results << body
       end
     end
 
-    results
+    #puts "Space: Getting bodies near #{key[0]}:#{key[1]} = #{results}"
+    return results
   end
 
-  # Get all items *near* a bucket x, y. d is a flag for overloading
-  def get(x : Float32, y : Float32, d : Int32)
-    xs = x.to_i32 // @size
-    ys = y.to_i32 // @size
-    get! xs, ys, d
-  end
-
-  # Check, delete, and return a bucket x, y
-  def del(x : Int32, y : Int32)
-    key = scale x, y
-    del key
-  end
-
-  # Check, delete, and return a bucket k
-  def del(key : Tuple(Int32, Int32))
-    if has key
-      result = get! key
-      del! key
+    #Move a body to a different grid area
+  def set(body : AbsBody, key : {Int32, Int32})
+    if @grid.has_key? body.area
+      @grid[body.area].delete body
+      if @grid[body.area].size == 0
+        @grid.delete body.area
+      end
     end
-    result
-  end
 
-  # Directly delete a bucket x, y
-  def del!(x : Int32, y : Int32)
-    key = scale x, y
-    del! key
-  end
-
-  # Directly delete a bucket k
-  def del!(key : Tuple(Int32, Int32))
-    @grid.delete(key)
-  end
-
-  def del!(body : AbsBody)
-    @objects.del! body.id
-    @grid[body.area].delete body
-  end
-
-  def del(id : Int32)
-    body = @objects.get id
-    if body
-      key = scale(body.positionition.x, body.positionition.y)
-      @grid[key].delete body
-      @objects.del! id
+    body.area = key
+    if !@grid.has_key? key
+      @grid[key] = Array(AbsBody).new
     end
+    @grid[key] << body
   end
-
-  def del!(id : Int32)
-    body = @objects.get! id
-    key = scale(body.positionition.x, body.positionition.y)
-    @grid[key].delete body
-    @objects.del! id
-  end
-    
-end#class  
-
+   
+end#class 

@@ -84,7 +84,7 @@ struct Rect < Shape
       puts "Shape: Collision at #{pos.x}:#{pos.y}"
       return true
     else
-      puts "Shape: No Collision at #{pos.x}:#{pos.y}"
+      #puts "Shape: No Collision at #{pos.x}:#{pos.y}"
       return false
     end
   end
@@ -113,7 +113,7 @@ struct Rect < Shape
       puts "Shape: Collision at #{pos.x}:#{pos.y}"
       return true
     else
-      puts "No Shape: Collision at #{pos.x}:#{pos.y}"
+      #puts "Shape: No collision at #{pos.x}:#{pos.y}"
       return false
     end
   end

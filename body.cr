@@ -20,12 +20,8 @@ class AbsBody
     @shape.check @position, other.shape, other.position
   end
 
-  def turn
-    @collision = false
-  end
-
   def collide(other : AbsBody)
-    puts "AbsBody: Collision"
+    puts "AbsBody: #{@id} Collision with #{other.id}"
     @collision = true
   end
 
@@ -35,7 +31,7 @@ class AbsBody
   def move(delta : Float64)
   end
 
-  def set(area : {Int32, Int32})
+  def relocate(area : {Int32, Int32})
     @area = area
   end
 
@@ -47,6 +43,11 @@ class StaticBody < AbsBody
     super id, position, shape
   end
 
+  def collide(other : AbsBody)
+    puts "StaticBody: #{@id} Collision with #{other.id}"
+    @collision = true
+  end
+
 end#class
   
   
@@ -55,8 +56,8 @@ class Body < AbsBody
     super id, position, shape
   end
 
-  def collision(other : AbsBody)
-    puts "Body: Collision"
+  def collide(other : AbsBody)
+    puts "Body: #{@id} Collision with #{other.id}"
     @direction = Vector.new 0.0, 0.0
   end
 
@@ -74,5 +75,16 @@ class Body < AbsBody
 
 end#class
 
+class Actor < Body
+  def initialize(id : Int32, position : Vector, shape : Shape)
+    super id, position, shape
+  end
+
+  def collide(other : AbsBody)
+    puts "Actor: #{@id} Collision with #{other.id}"
+    @direction = Vector.new 0.0, 0.0
+  end
+
+end#class
 
 
