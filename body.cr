@@ -8,20 +8,18 @@ class AbsBody
   property position : Vector
   property direction : Vector
   property area : Tuple(Int32, Int32)
+  property zone : Tuple(Int32, Int32)
   property collision : Bool
 
-  def initialize(@id, @position, @shape)
+  def initialize(@id, @shape, @position)
     @direction = Vector.new 0.0, 0.0
     @area = {0, 0}
+    @zone = {0, 0}
     @collision = false
   end
 
-  def check(other : AbsBody)
-    @shape.check @position, other.shape, other.position
-  end
-
   def collide(other : AbsBody)
-    puts "AbsBody: #{@id} Collision with #{other.id}"
+    #puts "AbsBody: #{@id} Collision with #{other.id}"
     @collision = true
   end
 
@@ -31,20 +29,20 @@ class AbsBody
   def move(delta : Float64)
   end
 
-  def relocate(area : {Int32, Int32})
-    @area = area
+  def to_s : String
+    return "#{@id}/#{@position.x}/#{@position.y}"
   end
 
 end#class
 
 
 class StaticBody < AbsBody
-  def initialize(id : Int32, position : Vector, shape : Shape)
-    super id, position, shape
+  def initialize(id : Int32, shape : Shape, position : Vector)
+    super id, shape, position
   end
 
   def collide(other : AbsBody)
-    puts "StaticBody: #{@id} Collision with #{other.id}"
+    #puts "StaticBody: #{@id} Collision with #{other.id}"
     @collision = true
   end
 
@@ -52,12 +50,12 @@ end#class
   
   
 class Body < AbsBody
-  def initialize(id : Int32, position : Vector, shape : Shape)
-    super id, position, shape
+  def initialize(id : Int32, shape : Shape, position : Vector)
+    super id, shape, position
   end
 
   def collide(other : AbsBody)
-    puts "Body: #{@id} Collision with #{other.id}"
+    #puts "Body: #{@id} Collision with #{other.id}"
     @direction = Vector.new 0.0, 0.0
   end
 
@@ -75,16 +73,5 @@ class Body < AbsBody
 
 end#class
 
-class Actor < Body
-  def initialize(id : Int32, position : Vector, shape : Shape)
-    super id, position, shape
-  end
-
-  def collide(other : AbsBody)
-    puts "Actor: #{@id} Collision with #{other.id}"
-    @direction = Vector.new 0.0, 0.0
-  end
-
-end#class
 
 
