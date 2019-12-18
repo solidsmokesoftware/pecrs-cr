@@ -25,10 +25,7 @@ class Space
     end 
   end
 
-  def add(body : AbsBody)
-    zone = @grid.scale body.position.x, body.position.y
-    body.zone = zone
-
+  def add(body : AbsBody, zone : Tuple(Int32, Int32))
     x_zone = zone[0]
     y_zone = zone[1]
 
@@ -43,19 +40,19 @@ class Space
     @grid.add(body, {x_zone+1, y_zone+1})
   end
 
-  def del(body : AbsBody)
-    x_zone = body.area[0]
-    y_zone = body.area[1]
+  def delete(body : AbsBody, zone : Tuple(Int32, Int32))
+    x_zone = zone[0]
+    y_zone = zone[1]
 
-    @grid.del(body, {x_zone-1, y_zone-1})
-    @grid.del(body, {x_zone, y_zone-1})
-    @grid.del(body, {x_zone+1, y_zone-1})
-    @grid.del(body, {x_zone-1, y_zone})
-    @grid.del(body, {x_zone, y_zone})
-    @grid.del(body, {x_zone+1, y_zone})
-    @grid.del(body, {x_zone-1, y_zone+1})
-    @grid.del(body, {x_zone, y_zone+1})
-    @grid.del(body, {x_zone+1, y_zone+1})
+    @grid.delete(body, {x_zone-1, y_zone-1})
+    @grid.delete(body, {x_zone, y_zone-1})
+    @grid.delete(body, {x_zone+1, y_zone-1})
+    @grid.delete(body, {x_zone-1, y_zone})
+    @grid.delete(body, {x_zone, y_zone})
+    @grid.delete(body, {x_zone+1, y_zone})
+    @grid.delete(body, {x_zone-1, y_zone+1})
+    @grid.delete(body, {x_zone, y_zone+1})
+    @grid.delete(body, {x_zone+1, y_zone+1})
   end
 
   #TODO handle moving so that only a 3 spaces are allocated and 3 deleted
@@ -66,9 +63,9 @@ class Space
 
   #Move a body to a different grid area
   def place(body : AbsBody, zone : {Int32, Int32})
-    del body
+    delete body, body.zone
     body.zone = zone
-    add body
+    add body, zone
   end
 
   def get(zone : Tuple(Int32, Int32))

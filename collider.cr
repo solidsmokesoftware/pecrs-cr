@@ -56,29 +56,31 @@ class Collider
 
   #Rect-Circle collision
   def check(shape : Rect, pos : Vector, shape_other : Circle, pos_other : Vector) : Bool
-    if pos.x > pos_other.x
-      x = pos.x + shape.w
-    elsif pos.x < pos_other.x
+    #Clamp x
+    if pos_other.x < pos.x
       x = pos.x
+    elsif pos_other.x > pos.x + shape.w
+      x = pos.x + shape.w
     else
       x = pos_other.x
     end
-        
-    if pos.y > pos_other.y
-      y = pos.y + shape.h
-    elsif pos.y < pos_other.x
+
+    #Clamp y
+    if pos_other.y < pos.y
       y = pos.y
+    elsif pos_other.y > pos.y + shape.h
+      y = pos.y + shape.h
     else
       y = pos_other.y
     end
 
-    dx = pos.x - pos_other.x
-    dy = pos.y - pos_other.y
+    dx = x - pos_other.x
+    dy = y - pos_other.y
     if dx * dx + dy * dy < shape_other.r * shape_other.r
-      #puts "Collider: Collision at #{pos.x}:#{pos.y}"
+      #puts "Shape: Collision at #{pos.x}:#{pos.y}"
       return true
     else
-      #puts "Collider: No collision at #{pos.x}:#{pos.y}"
+      #puts "Shape: No collision at #{pos.x}:#{pos.y}"
       return false
     end
   end

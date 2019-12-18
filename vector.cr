@@ -9,6 +9,11 @@ struct Vector
     @y = y
   end
 
+  def initialize(x : Int32, y : Int32)
+    @x = x.to_f32
+    @y = y.to_f32
+  end
+
   def +(other : Vector)
     return Vector.new @x + other.x, @y + other.y
   end

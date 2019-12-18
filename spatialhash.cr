@@ -47,15 +47,15 @@ class SpatialHash(T)
     @grid[area] << item  
   end
 
-  def del(item : T, x : Int32, y : Int32)
+  def delete(item : T, x : Int32, y : Int32)
     del item, scale(x, y)
   end
 
-  def del(item : T, x : Float32, y : Float32)
+  def delete(item : T, x : Float32, y : Float32)
     del item, scale(x, y)
   end
 
-  def del(item : T, area : Tuple(Int32, Int32))
+  def delete(item : T, area : Tuple(Int32, Int32))
     if grid.has_key? area
       @grid[area].delete item
       if @grid[area].size == 0
