@@ -7,13 +7,11 @@ class AbsBody
   property shape : Shape
   property position : Vector
   property direction : Vector
-  property area : Tuple(Int32, Int32)
   property zone : Tuple(Int32, Int32)
   property collision : Bool
 
   def initialize(@id, @shape, @position)
     @direction = Vector.new 0.0, 0.0
-    @area = {0, 0}
     @zone = {0, 0}
     @collision = false
   end

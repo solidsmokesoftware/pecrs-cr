@@ -12,17 +12,23 @@ class Space
     @collider = Collider.new
   end
 
-  def check(body : AbsBody)
-    #puts "Space: checking #{body.id}##{body.position.x}:#{body.position.y} in #{area[0]}:#{area[1]} against #{others.size} others"
+  def check(body : AbsBody) : Bool
     @grid.get(body.zone).each do |other|
       if body.id != other.id
-        if @collider.check body.shape, body.position, other.shape, other.position
-          #puts "Space: Collision between #{body.id} and #{other.id} at #{other.position.x}:#{other.position.y}"
-          body.collide other
-          other.collide body
+        if check body, other
+          return true
         end
       end
-    end 
+    end
+    return false
+  end
+
+  def check(body : AbsBody, other : AbsBody) : Bool
+    if @collider.check body.shape, body.position, other.shape, other.position
+      return true
+    else
+      return false
+    end
   end
 
   def add(body : AbsBody, zone : Tuple(Int32, Int32))
