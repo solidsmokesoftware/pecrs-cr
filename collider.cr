@@ -3,6 +3,60 @@ require "./vector"
 
 
 class Collider
+  #Point-Point distance from collision
+  def dist(shape : Point, pos : Vector, shape_other : Point, pos_other : Vector)
+    return pos.dist pos_other
+  end
+
+  #Point-Rect distance from collision
+  def dist(shape : Rect, pos : Vector, shape_other : Rect, pos_other : Vector) : Vector
+    if pos.x > pos_other.x
+      xd = pos_other.x + shape_other.w - pos.x
+    else
+      xd = pos.x + shape.w - pos_other.x
+    end
+    if pos.y > pos_other.y
+      yd = pos_other.y + shape_other.h - pos.y
+    else
+      yd = pos.y + shape.h - pos_other.y
+    end
+    return Vector.new xd, yd
+  end
+
+  def dist(shape : Rect, pos : Vector, shape_other : Circle, pos_other : Vector) : Vector
+    #TODO fix this circles are being handles as if they were square
+    if pos.x > pos_other.x
+      xd = pos_other.x + shape_other.r - pos.x
+    else
+      xd = pos.x + shape.w - pos_other.x
+    end
+    if pos.y > pos_other.y
+      yd = pos_other.y + shape_other.r - pos.y
+    else
+      yd = pos.y + shape.h - pos_other.y
+    end
+    return Vector.new xd, yd
+  end
+
+  def dist(shape : Circle, pos : Vector, shape_other : Rect, pos_other : Vector) : Vector
+    return dist shape_other, pos_other, shape, pos
+  end
+
+  def dist(shape : Circle, pos : Vector, shape_other : Circle, pos_other : Vector) : Vector
+    #TODO fix this circles are being handled like a rect
+    if pos.x > pos_other.x
+      xd = pos_other.x + shape_other.r - pos.x
+    else
+      xd = pos.x + shape.r - pos_other.x
+    end
+    if pos.y > pos_other.y
+      yd = pos_other.y + shape_other.r - pos.y
+    else
+      yd = pos.y + shape.r - pos_other.y
+    end
+    return Vector.new xd, yd
+  end    
+
   #Point-Point collision
   def check(shape : Point, pos : Vector, shape_other : Point, pos_other : Vector) : Bool
     if pos.x == pos_other.x && pos.y == pos_other.y

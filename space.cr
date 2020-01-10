@@ -61,7 +61,7 @@ class Space
     @grid.delete(body, {x_zone+1, y_zone+1})
   end
 
-  #TODO handle moving so that only a 3 spaces are allocated and 3 deleted
+  #TODO optimization handle moving so that only a 3 spaces are allocated and 3 deleted
   def move(body : AbsBody, dir : Vector)
 
   end

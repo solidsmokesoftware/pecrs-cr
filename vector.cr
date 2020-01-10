@@ -34,8 +34,16 @@ struct Vector
     return Vector.new @x - scalar, @y - scalar
   end
 
+  def *(scalar : Int32)
+    return Vector.new @x * scalar.to_f32, @y * scalar.to_f32
+  end
+
   def *(scalar : Float32)
     return Vector.new @x * scalar, @y * scalar
+  end
+
+  def *(scalar : Float64)
+    return Vector.new @x * scalar.to_f32, @y * scalar.to_f32
   end
 
   def /(scalar : Float32)
