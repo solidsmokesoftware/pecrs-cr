@@ -12,6 +12,14 @@ class Space
     @collider = Collider.new
   end
 
+  def pos_to_zone(x : Float32, y : Float32) : Tuple(Int32, Int32)
+    return { (x.to_i32 // ZONE_SIZE), (y.to_i32 // ZONE_SIZE) }
+  end
+
+  def pos_to_zone(x : Int32, y : Int32) : Tuple(Int32, Int32)
+    return { (x // ZONE_SIZE), (y // ZONE_SIZE) }
+  end
+
   def check(body : AbsBody) : Bool
     @grid.get(body.zone).each do |other|
       if body.id != other.id
@@ -77,5 +85,4 @@ class Space
   def get(zone : Tuple(Int32, Int32))
     return @grid.get zone
   end
-
 end#class 

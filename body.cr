@@ -9,14 +9,12 @@ class AbsBody
   
   property direction : Vector
   property zone : Tuple(Int32, Int32)
-  property collision : Bool
   property speed : Int32
   property name : String
 
   def initialize(@id, @position, @shape)
     @direction = Vector.new 0.0, 0.0
     @zone = {0, 0}
-    @collision = false
     @speed = 0
     @name = "absbody"
   end
@@ -42,18 +40,21 @@ class AbsBody
     @position = @position.move direction, delta
   end
 
-  def to_s : String
-    return "#{@id}/#{@position.x.to_i}/#{@position.y.to_i}"
-  end
-
-  def info : String
+  def add_com : String
     return "#{@id}/#{@position.x.to_i}/#{@position.y.to_i}/#{@name}"
   end
 
+  def delete_com : String
+    return "#{id}"
+  end
+
+  def pos_com : String
+    return "#{@id}/#{@position.x.to_i}/#{@position.y.to_i}"
+  end
 end#class
 
 
-class StaticBody < AbsBody
+class Static < AbsBody
   def initialize(id, position, shape)
     super id, position, shape
   end
@@ -65,6 +66,4 @@ class Body < AbsBody
     super id, position, shape
   end
 end#class
-
-
 
