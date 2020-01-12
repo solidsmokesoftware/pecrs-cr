@@ -39,22 +39,10 @@ class AbsBody
   def move(direction : Vector, delta : Float64)
     @position = @position.move direction, delta
   end
-
-  def add_com : String
-    return "#{@id}/#{@position.x.to_i}/#{@position.y.to_i}/#{@name}"
-  end
-
-  def delete_com : String
-    return "#{id}"
-  end
-
-  def pos_com : String
-    return "#{@id}/#{@position.x.to_i}/#{@position.y.to_i}"
-  end
 end#class
 
 
-class Static < AbsBody
+class StaticBody < AbsBody
   def initialize(id, position, shape)
     super id, position, shape
   end
