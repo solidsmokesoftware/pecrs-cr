@@ -15,41 +15,41 @@ class Space
     @collider = Collider.new
   end
 
-  def pos_to_zone(pos : Vector) : Tuple(Int32, Int32)
+  def pos_to_area(pos : Vector) : Tuple(Int32, Int32)
     #Returns a tuple(scaled x, scaled y) describing the collision area covered at x, y
     return { (pos.x.to_i32 // @grid.size), (pos.y.to_i32 // @grid.size) }
   end
 
-  def pos_to_zone(x : Float32, y : Float32) : Tuple(Int32, Int32)
+  def pos_to_area(x : Float32, y : Float32) : Tuple(Int32, Int32)
     #Returns a tuple(scaled x, scaled y) describing the collision area covered at x, y
     return { (x.to_i32 // @grid.size), (y.to_i32 // @grid.size) }
   end
 
-  def pos_to_zone(x : Int32, y : Int32) : Tuple(Int32, Int32)
+  def pos_to_area(x : Int32, y : Int32) : Tuple(Int32, Int32)
     #Returns a tuple(scaled x, scaled y) describing the collision area covered at x, y
     return { (x // @grid.size), (y // @grid.size) }
   end
 
   def has(body : AbsBody)
-    #Returns True if a body is in the space at the body's zone. False if not
-    #Note there room for bugs here if body.zone is not matched up propertly with the right collision area.
+    #Returns True if a body is in the space at the body's area. False if not
+    #Note there room for bugs here if body.area is not matched up propertly with the right collision area.
     #Use Manager to move and place bodies to avoid problems
-    if body in @grid.grid[body.zone]
+    if body in @grid.grid[body.area]
       return true
     else
       return false
     end
   end
 
-  def get(zone : Tuple(Int32, Int32))
-    return @grid.get zone
+  def get(area : Tuple(Int32, Int32))
+    return @grid.get area
   end
 
   def get(position : Vector, shape : Shape)
     #Returns a list of bodies that colliding with shape at position in the space.
-    zone = pos_to_zone(position)
+    area = pos_to_area(position)
     collisions = []
-    bucket = @grid.get zone
+    bucket = @grid.get area
     bucket.each do |body|
       if @collider.check shape, position, body.shape, body.position
         collisions << body
@@ -61,7 +61,7 @@ class Space
   def get(body : Body)
     #Returns a list of bodies colliding with body
     collisions = []
-    @grid.get(body.zone).each do |other|
+    @grid.get(body.area).each do |other|
       if body.id != other.id
         if check body, other
           collisions << other
@@ -73,7 +73,7 @@ class Space
 
   def check(body : AbsBody) : Bool
     #Returns True if something is colliding with body in the space.
-    @grid.get(body.zone).each do |other|
+    @grid.get(body.area).each do |other|
       if body.id != other.id
         if check body, other
           return true
@@ -92,39 +92,39 @@ class Space
     end
   end
 
-  def add(body : AbsBody, zone : Tuple(Int32, Int32))
+  def add(body : AbsBody, area : Tuple(Int32, Int32))
     #Adds a body to the space.
     #Bodies are added to their collision area as well as the 8 nearest neighboring cells to handle overlap and fast moving obejcts.
-    #zones are a Tuple of scaled x, and y, obtained from pos_to_zone(x, y)
-    x_zone = zone[0]
-    y_zone = zone[1]
+    #areas are a Tuple of scaled x, and y, obtained from pos_to_area(x, y)
+    x_area = area[0]
+    y_area = area[1]
 
-    @grid.add(body, {x_zone-1, y_zone-1})
-    @grid.add(body, {x_zone, y_zone-1})
-    @grid.add(body, {x_zone+1, y_zone-1})
-    @grid.add(body, {x_zone-1, y_zone})
-    @grid.add(body, {x_zone, y_zone})
-    @grid.add(body, {x_zone+1, y_zone})
-    @grid.add(body, {x_zone-1, y_zone+1})
-    @grid.add(body, {x_zone, y_zone+1})
-    @grid.add(body, {x_zone+1, y_zone+1})
+    @grid.add(body, {x_area-1, y_area-1})
+    @grid.add(body, {x_area, y_area-1})
+    @grid.add(body, {x_area+1, y_area-1})
+    @grid.add(body, {x_area-1, y_area})
+    @grid.add(body, {x_area, y_area})
+    @grid.add(body, {x_area+1, y_area})
+    @grid.add(body, {x_area-1, y_area+1})
+    @grid.add(body, {x_area, y_area+1})
+    @grid.add(body, {x_area+1, y_area+1})
   end
 
-  def delete(body : AbsBody, zone : Tuple(Int32, Int32))
+  def delete(body : AbsBody, area : Tuple(Int32, Int32))
     #Removes a body from the space.
-    #zones are a Tuple of scaled x, and y, obtained from pos_to_zone(x, y)
-    x_zone = zone[0]
-    y_zone = zone[1]
+    #areas are a Tuple of scaled x, and y, obtained from pos_to_area(x, y)
+    x_area = area[0]
+    y_area = area[1]
 
-    @grid.delete(body, {x_zone-1, y_zone-1})
-    @grid.delete(body, {x_zone, y_zone-1})
-    @grid.delete(body, {x_zone+1, y_zone-1})
-    @grid.delete(body, {x_zone-1, y_zone})
-    @grid.delete(body, {x_zone, y_zone})
-    @grid.delete(body, {x_zone+1, y_zone})
-    @grid.delete(body, {x_zone-1, y_zone+1})
-    @grid.delete(body, {x_zone, y_zone+1})
-    @grid.delete(body, {x_zone+1, y_zone+1})
+    @grid.delete(body, {x_area-1, y_area-1})
+    @grid.delete(body, {x_area, y_area-1})
+    @grid.delete(body, {x_area+1, y_area-1})
+    @grid.delete(body, {x_area-1, y_area})
+    @grid.delete(body, {x_area, y_area})
+    @grid.delete(body, {x_area+1, y_area})
+    @grid.delete(body, {x_area-1, y_area+1})
+    @grid.delete(body, {x_area, y_area+1})
+    @grid.delete(body, {x_area+1, y_area+1})
   end
 
   def move(body : AbsBody, dir : Vector)
@@ -132,11 +132,11 @@ class Space
       #Not implemented yet.
   end
 
-  def place(body : AbsBody, zone : {Int32, Int32})
+  def place(body : AbsBody, area : {Int32, Int32})
     #Moves a body from one collision area to another
-    delete body, body.zone
-    body.zone = zone
-    add body, zone
+    delete body, body.area
+    body.area = area
+    add body, area
   end
 
 end#class 

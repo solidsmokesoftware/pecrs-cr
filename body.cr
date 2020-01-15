@@ -13,13 +13,13 @@ class AbsBody
   property shape : Shape
   
   property direction : Vector
-  property zone : Tuple(Int32, Int32)
+  property area : Tuple(Int32, Int32)
   property speed : Int32
   property name : String
 
   def initialize(@id, @position, @shape)
     @direction = Vector.new 0.0, 0.0
-    @zone = {0, 0}
+    @area = {0, 0}
     @speed = 0
     @name = "absbody"
   end
@@ -27,7 +27,7 @@ class AbsBody
   def initialize(@id, x, y, @shape)
     @position = Vector.new x, y
     @direction = Vector.new 0.0, 0.0
-    @zone = {0, 0}
+    @area = {0, 0}
     @collision = false
     @speed = 0
     @name = "absbody"

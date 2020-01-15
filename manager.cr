@@ -5,7 +5,7 @@ require "./index"
 
 class Manager
   # Manager of the physics system
-  # size is how large collision zones in the space are.
+  # size is how large collision areas in the space are.
 
   property index : Index
   property factory : Hash(Int32, AbsBody.class)
@@ -29,11 +29,11 @@ class Manager
   def add(body : AbsBody)
     #Adds a body to the system.
     #All bodies are tracked by id in list
-    #All bodies are tracked by zone in space
+    #All bodies are tracked by area in space
     #Bodies(Not StaticBodies) are added to a list of active bodies
     @list[body.id] = body
-    body.zone = @space.pos_to_zone body.position.x, body.position.y
-    @space.add body, body.zone
+    body.area = @space.pos_to_area body.position.x, body.position.y
+    @space.add body, body.area
     if body.is_a? Body
       @actives << body
     end
@@ -77,7 +77,7 @@ class Manager
     #Removes a body from the system.
     #Whatever the body was added to on add is cleaned up here.
     @list.delete body
-    @space delete body, body.zone
+    @space delete body, body.area
     if body.is_a? Body
       @actives.delete body
     end
@@ -88,14 +88,14 @@ class Manager
     #Callback whenever bodies are removed from the system
   end
 
-  def update_zone(body : AbsBody)
+  def update_area(body : AbsBody)
     #Updates which collision area a body is in
-    zone = @space.pos_to_zone body.position.x, body.position.y
-    if zone != body.zone
-      @space.delete body, body.zone
-      @space.add body, zone #TODO add a move zone for optimization
-      body.zone = zone
-      on_zone body
+    area = @space.pos_to_area body.position.x, body.position.y
+    if area != body.area
+      @space.delete body, body.area
+      @space.add body, area #TODO add a move area for optimization
+      body.area = area
+      on_area body
     end
   end
 
@@ -103,7 +103,7 @@ class Manager
     #Move a body by it's speed and direction for delta duration.
     #Use this instead of body.move(delta) to keep track of collision area
     body.move delta
-    update_zone body
+    update_area body
     on_move body
     on_pos body
   end
@@ -112,7 +112,7 @@ class Manager
     #Move a body by it's speed in the direction of x, y for delta duration.
     #Use this instead of body.move(x, y, delta) to keep track of collision area
     body.move direction, delta
-    update_zone body
+    update_area body
     on_move body
     on_pos body
   end
@@ -131,7 +131,7 @@ class Manager
 
   def place(body : AbsBody, position : Vector)
     body.position = position
-    update_zone body
+    update_area body
     on_place body
     on_pos body
   end
@@ -150,16 +150,16 @@ class Manager
     #This is invoked with move(body, delta), move_to(body, x, y, delta), and place(body, x, y)
   end
 
-  def on_zone(body : AbsBody)
-    #Callback whenever bodies have their zone changed by the system
+  def on_area(body : AbsBody)
+    #Callback whenever bodies have their area changed by the system
     #This might be invoked through move(body, delta), move_to(body, x, y, delta), or place(body, x, y)
   end
 
   def find(pos : Vector) 
     #Gets a body in the space at x, y
     #Uses a 1x1 pointer rect to test for collisions.
-    zone = @space.pos_to_zone pos
-    bucket = @space.get zone
+    area = @space.pos_to_area pos
+    bucket = @space.get area
     for body in bucket:
       if @space.collider.check @pointer, pos, body.shape, body.position
         return body
