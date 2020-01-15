@@ -16,12 +16,14 @@ class AbsBody
   property area : Tuple(Int32, Int32)
   property speed : Int32
   property name : String
+  property moving : Bool
 
   def initialize(@id, @position, @shape)
     @direction = Vector.new 0.0, 0.0
     @area = {0, 0}
     @speed = 0
     @name = "absbody"
+    @moving = false
   end
 
   def initialize(@id, x, y, @shape)
@@ -31,9 +33,10 @@ class AbsBody
     @collision = false
     @speed = 0
     @name = "absbody"
+    @moving = false
   end
 
-  def collide(other : AbsBody)
+  def on_collision(other : AbsBody)
     #Callback that gives you the other body on collisions
   end
 

@@ -105,7 +105,7 @@ class Manager
     body.move delta
     update_area body
     on_move body
-    on_pos body
+    on_motion body
   end
 
   def move(body : AbsBody, direction : Vector, delta)
@@ -114,7 +114,7 @@ class Manager
     body.move direction, delta
     update_area body
     on_move body
-    on_pos body
+    on_motion body
   end
 
   def move(body : AbsBody, x, y, delta)
@@ -133,8 +133,38 @@ class Manager
     body.position = position
     update_area body
     on_place body
-    on_pos body
+    on_motion body
   end
+
+  def turn(body : AbsBody, x, y)
+    turn body, Vector.new(x, y)
+  end
+
+  def turn(body : AbsBody, direction : Vector)
+    body.direction = direction
+    on_turn body
+  end
+
+ def on_turn(body : AbsBody)
+    #Callback for when a body changes direction
+ end
+
+ def moving(body : AbsBody)
+    body.moving = true
+    on_moving body
+ end
+
+ def on_moving(body : AbsBody)
+    #Callback for when a body starts moving
+ end
+
+ def stop(body : AbsBody)
+    body.moving = false
+    on_stop body
+
+ def on_stop(body : AbsBody)
+    #Callback for when a body stops moving
+ end
 
   def on_move(body : AbsBody)
     #Callback whenever bodies are moved by the system
@@ -145,7 +175,7 @@ class Manager
     #Callback whenever bodies are placed by the system
   end
 
-  def on_pos(body : AbsBody)
+  def on_motion(body : AbsBody)
     #Callback whenever bodies have thier position changed by the system
     #This is invoked with move(body, delta), move_to(body, x, y, delta), and place(body, x, y)
   end
@@ -153,6 +183,10 @@ class Manager
   def on_area(body : AbsBody)
     #Callback whenever bodies have their area changed by the system
     #This might be invoked through move(body, delta), move_to(body, x, y, delta), or place(body, x, y)
+  end
+
+  def on_collision(body : AbsBody)
+    #Callback whenever bodies collide with another body
   end
 
   def find(pos : Vector) 
@@ -182,3 +216,18 @@ class Manager
     end
   end
 end
+
+def step(delta)
+  #Advances the simulation by delta steps
+  @actives.each do |body|
+    if body.state == "moving"
+      move body, delta
+    end
+  end
+
+  #TODO This is very unoptimized
+  @actives.each do |body|
+    if self.space.check(body)
+      on_collision(body)
+    end
+  end
