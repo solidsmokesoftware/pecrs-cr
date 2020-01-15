@@ -4,6 +4,9 @@ require "./index"
 
 
 class Manager
+  # Manager of the physics system
+  # size is how large collision zones in the space are.
+
   property index : Index
   property factory : Hash(Int32, AbsBody.class)
   property list : Hash(Int32, AbsBody) #All objects in the space
@@ -23,25 +26,31 @@ class Manager
     @pointer = Rect.new 1, 1
   end
 
-  def add(body : AbsBody) 
+  def add(body : AbsBody)
+    #Adds a body to the system.
+    #All bodies are tracked by id in list
+    #All bodies are tracked by zone in space
+    #Bodies(Not StaticBodies) are added to a list of active bodies
     @list[body.id] = body
     body.zone = @space.pos_to_zone body.position.x, body.position.y
     @space.add body, body.zone
     if body.is_a? Body
       @actives << body
     end
-    @updates << body.add_info
     on_add body
   end
 
   def on_add(body : AbsBody)
-    return #callback
+    #Callback whenever bodies are added to the system
   end
 
   def make(type, id, position)
+    #Produces a body of type from the factory at position x, y
+    #If an id is not assigned during make, one will be generated. This is needed for syncing objects across clients and server
+    #After a body is made, it is automatically added to the system.
     body = @factory[type].new id, position
-    add body
     on_make body
+    add body
     return body
   end
 
@@ -61,43 +70,51 @@ class Manager
   end
 
   def on_make(body : AbsBody)
-    return #callback
+    #Callback whenever bodies are made by the system
   end
 
   def delete(body)
-    puts("Objects: Deleting body")
+    #Removes a body from the system.
+    #Whatever the body was added to on add is cleaned up here.
     @list.delete body
     @space delete body, body.zone
     if body.is_a? Body
       @actives.delete body
     end
-    @updates << body.delete_info
     on_delete body
   end
 
   def on_delete(body : AbsBody)
-    return #Callback
+    #Callback whenever bodies are removed from the system
   end
 
   def update_zone(body : AbsBody)
+    #Updates which collision area a body is in
     zone = @space.pos_to_zone body.position.x, body.position.y
     if zone != body.zone
       @space.delete body, body.zone
       @space.add body, zone #TODO add a move zone for optimization
       body.zone = zone
+      on_zone body
     end
   end
 
   def move(body : AbsBody, delta)
+    #Move a body by it's speed and direction for delta duration.
+    #Use this instead of body.move(delta) to keep track of collision area
     body.move delta
     update_zone body
-    on_move body, delta
+    on_move body
+    on_pos body
   end
 
   def move(body : AbsBody, direction : Vector, delta)
+    #Move a body by it's speed in the direction of x, y for delta duration.
+    #Use this instead of body.move(x, y, delta) to keep track of collision area
     body.move direction, delta
     update_zone body
-    on_move body, delta
+    on_move body
+    on_pos body
   end
 
   def move(body : AbsBody, x, y, delta)
@@ -106,6 +123,8 @@ class Manager
   end
 
   def place(body : AbsBody, x, y)
+    #Directly place a body at x, y
+    #Use this instead of body.place(x, y) to keep track of collision area
     position = Vector.new x, y
     place body, position
   end
@@ -113,16 +132,32 @@ class Manager
   def place(body : AbsBody, position : Vector)
     body.position = position
     update_zone body
-    on_move body, delta
+    on_place body
+    on_pos body
   end
 
-  def on_move(body : AbsBody, delta)
-    return #callback
+  def on_move(body : AbsBody)
+    #Callback whenever bodies are moved by the system
+    #This is invoked with both move(body, delta) and move_to(body, x, y, delta)
   end
 
-  def get(pos : Vector) 
-    #TODO think about returning an array instead to catch multiple objects at the same position instead of the first
-    #TODO Sounds like a good idea
+  def on_place(body : AbsBody)
+    #Callback whenever bodies are placed by the system
+  end
+
+  def on_pos(body : AbsBody)
+    #Callback whenever bodies have thier position changed by the system
+    #This is invoked with move(body, delta), move_to(body, x, y, delta), and place(body, x, y)
+  end
+
+  def on_zone(body : AbsBody)
+    #Callback whenever bodies have their zone changed by the system
+    #This might be invoked through move(body, delta), move_to(body, x, y, delta), or place(body, x, y)
+  end
+
+  def find(pos : Vector) 
+    #Gets a body in the space at x, y
+    #Uses a 1x1 pointer rect to test for collisions.
     zone = @space.pos_to_zone pos
     bucket = @space.get zone
     for body in bucket:
@@ -133,12 +168,13 @@ class Manager
     return nil
   end
 
-  def get(x, y)
+  def find(x, y)
     pos = Vector.new x, y
-    return get pos
+    return find pos
   end
 
   def get(id : Int32)
+    #Gets an body by its id
     if @list.has_key? id
       return @list[id]
     else

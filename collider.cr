@@ -3,6 +3,12 @@ require "./vector"
 
 
 class Collider
+  #Collider handles collisions two shapes at two given positions. Positions are Vectors
+  #Note that the collider is abstract, dealing with any set of shapes and positions, rather than in-game physical bodies.
+  #Use check(shape, pos, shape_other, pos_other) to see if there would be a collision at a position when you don't know what
+  #shapes are being used in the collision. Otherwise use the specific collider methods such as rect_rect(shape, pos, shape_other, pos_other)
+  #For the purposes of this collider, Rects are AABBs (Axis-Aligned Bounding Boxes).
+
   #Point-Point distance from collision
   def dist(shape : Point, pos : Vector, shape_other : Point, pos_other : Vector)
     return pos.dist pos_other

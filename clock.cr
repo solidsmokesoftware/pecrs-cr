@@ -13,7 +13,8 @@
 {% end %}
 
 
-class Ticker    
+class Ticker
+  # For getting monotonic time without needless conversions 
   
   {% if flag?(:win32) %}
     def get : Int64
@@ -54,6 +55,10 @@ end#class
 
 
 class Clock
+  # Keeps track of time and handles ticking
+  # Call either tick(), tick_time(), or tick_check() once every loop to run as an engine.
+  # rate is the time needed before the next tick
+  
   property ticker : Ticker
   property rate : Int64
   property value : Int64
@@ -99,6 +104,7 @@ class Clock
   end
 
   def tick! : Int64
+    #Attemps to advance the system clock. Returns the current system time
     value = @ticker.get
     @value += value
     if @value > @rate
@@ -109,6 +115,7 @@ class Clock
   end
   
   def tick? : Bool
+    #Attemps to advance the system clock. Returns True if time changes, False if not
     @value += @ticker.get
     if @value > @rate
       @value = 0_i64
@@ -120,6 +127,11 @@ class Clock
   end
   
   def tick : Float64
+    #Attemps to advance the system clock. Returns delta if time changes, 0 if not
+    #Delta is the ratio of time that has passed since the tick. For example if your tick rate is 100ms, and your tick happens 150ms
+    #after your last tick, your delta will be 1.5
+    #You probably are going to want to use this one for timing in games
+
     @value += @ticker.get
     if @value > @rate
       delta = (@value / @rate).to_f64

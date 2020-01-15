@@ -1,5 +1,9 @@
 
 
+  # A generic spatialhash
+  # Keeps a bucket of objects at a given scaled position
+  # Size is the how large each square bucket is
+
 class SpatialHash(T)
   property grid : Hash(Tuple(Int32, Int32), Array(T))
   property size : Int32

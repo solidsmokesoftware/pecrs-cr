@@ -1,5 +1,7 @@
 
 
+#Vector datatype.
+
 struct Vector
   property x : Float32
   property y : Float32

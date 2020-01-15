@@ -1,6 +1,10 @@
 
 
 class Index
+  # Index keeps track what number to assign to new entities.
+  # Use get() to obtain a unique number from the index
+  # Use delete(value) to return a number to the index for reuse
+  
   property count : Int32
   property free : Array(Int32)
 
