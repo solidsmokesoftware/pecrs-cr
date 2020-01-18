@@ -45,10 +45,10 @@ class Space
     return @grid.get area
   end
 
-  def get(position : Vector, shape : Shape)
+  def get(position : Vector, shape : Shape) : Array(AbsBody)
     #Returns a list of bodies that colliding with shape at position in the space.
     area = pos_to_area(position)
-    collisions = []
+    collisions = Array(AbsBody).new
     bucket = @grid.get area
     bucket.each do |body|
       if @collider.check shape, position, body.shape, body.position
@@ -58,9 +58,9 @@ class Space
     return collisions
   end
 
-  def get(body : Body)
+  def get(body : Body) : Array(AbsBody)
     #Returns a list of bodies colliding with body
-    collisions = []
+    collisions = Array(AbsBody).new
     @grid.get(body.area).each do |other|
       if body.id != other.id
         if check body, other
