@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.31.1">
+
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/doc.js"></script>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+
+  <meta id="repository-name" content="github.com/solidsmokesoftware/physicr">
+  <title>Controller - github.com/solidsmokesoftware/physicr</title>
+  <script type="text/javascript">
+    CrystalDoc.base_path = "";
+  </script>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="repository-links">
+      <a href="index.html">README</a>
+    </div>
+  </div>
+
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/AbsBody" data-name="absbody">
+      <a href="AbsBody.html">AbsBody</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/Body" data-name="body">
+      <a href="Body.html">Body</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/Circle" data-name="circle">
+      <a href="Circle.html">Circle</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/Clock" data-name="clock">
+      <a href="Clock.html">Clock</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/Collider" data-name="collider">
+      <a href="Collider.html">Collider</a>
+      
+    </li>
+  
+  <li class=" current" data-id="github.com/solidsmokesoftware/physicr/Controller" data-name="controller">
+      <a href="Controller.html">Controller</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/Index" data-name="index">
+      <a href="Index.html">Index</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/Rect" data-name="rect">
+      <a href="Rect.html">Rect</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/Shape" data-name="shape">
+      <a href="Shape.html">Shape</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/Space" data-name="space">
+      <a href="Space.html">Space</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/SpatialHash" data-name="spatialhash(t)">
+      <a href="SpatialHash.html">SpatialHash</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/StaticBody" data-name="staticbody">
+      <a href="StaticBody.html">StaticBody</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/Ticker" data-name="ticker">
+      <a href="Ticker.html">Ticker</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/Vector" data-name="vector">
+      <a href="Vector.html">Vector</a>
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">class</span> Controller
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="Controller.html">Controller</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
+
+
+  <h2>
+    <a id="overview" class="anchor" href="#overview">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Overview
+  </h2>
+
+  <p>High-level manager of the physics system</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>
+    <a id="defined-in" class="anchor" href="#defined-in">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Defined in:
+  </h2>
+  
+    
+      <a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L5" target="_blank">
+        controller.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+
+
+  <h2>
+    <a id="constructors" class="anchor" href="#constructors">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructors
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new(size)-class-method" class="signature"><strong>.new</strong>(size)</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#actives:Array(Body)-instance-method" class="signature"><strong>#actives</strong> : Array(Body)</a>
+        
+          <div class="summary"><p>All objects in the space</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#actives=(actives:Array(Body))-instance-method" class="signature"><strong>#actives=</strong>(actives : Array(Body))</a>
+        
+          <div class="summary"><p>All objects in the space</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#add(body:AbsBody)-instance-method" class="signature"><strong>#add</strong>(body : AbsBody)</a>
+        
+          <div class="summary"><p>Adds a body to the system.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#delete(body)-instance-method" class="signature"><strong>#delete</strong>(body)</a>
+        
+          <div class="summary"><p>Removes a body from the system.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#factory:Hash(Int32,AbsBody.class)-instance-method" class="signature"><strong>#factory</strong> : Hash(Int32, <span class="t">AbsBody</span>.<span class="k">class</span>)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#factory=(factory:Hash(Int32,AbsBody.class))-instance-method" class="signature"><strong>#factory=</strong>(factory : Hash(Int32, <span class="t">AbsBody</span>.<span class="k">class</span>))</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#find(x,y)-instance-method" class="signature"><strong>#find</strong>(x, y)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#find(pos:Vector)-instance-method" class="signature"><strong>#find</strong>(pos : Vector)</a>
+        
+          <div class="summary"><p>Gets a body in the space at x, y Uses a 1x1 pointer rect to test for collisions.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#get(id:Int32)-instance-method" class="signature"><strong>#get</strong>(id : Int32)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#index:Index-instance-method" class="signature"><strong>#index</strong> : Index</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#index=(index:Index)-instance-method" class="signature"><strong>#index=</strong>(index : Index)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#list:Hash(Int32,AbsBody)-instance-method" class="signature"><strong>#list</strong> : Hash(Int32, AbsBody)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#list=(list:Hash(Int32,AbsBody))-instance-method" class="signature"><strong>#list=</strong>(list : Hash(Int32, AbsBody))</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#make(type:AbsBody.class,id,position,direction=Vector.new(0,0))-instance-method" class="signature"><strong>#make</strong>(type : <span class="t">AbsBody</span>.<span class="k">class</span>, id, position, direction = <span class="t">Vector</span>.<span class="k">new</span>(<span class="n">0</span>, <span class="n">0</span>))</a>
+        
+          <div class="summary"><p>Produces a body of type from the factory at position x, y If an id is not assigned during make, one will be generated.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#make(key,id,position)-instance-method" class="signature"><strong>#make</strong>(key, id, position)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#make(type:AbsBody.class,position)-instance-method" class="signature"><strong>#make</strong>(type : <span class="t">AbsBody</span>.<span class="k">class</span>, position)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#make(key,position)-instance-method" class="signature"><strong>#make</strong>(key, position)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#move(body:AbsBody,delta)-instance-method" class="signature"><strong>#move</strong>(body : AbsBody, delta)</a>
+        
+          <div class="summary"><p>Move a body by it's speed and direction for delta duration.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#move(body:AbsBody,direction:Vector,delta)-instance-method" class="signature"><strong>#move</strong>(body : AbsBody, direction : Vector, delta)</a>
+        
+          <div class="summary"><p>Move a body by it's speed in the direction of x, y for delta duration.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#move(body:AbsBody,x,y,delta)-instance-method" class="signature"><strong>#move</strong>(body : AbsBody, x, y, delta)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#moving(body:AbsBody)-instance-method" class="signature"><strong>#moving</strong>(body : AbsBody)</a>
+        
+          <div class="summary"><p>Tells a body to move when the system is processed.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#on_add(body:AbsBody)-instance-method" class="signature"><strong>#on_add</strong>(body : AbsBody)</a>
+        
+          <div class="summary"><p>Callback whenever bodies are added to the system</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#on_area(body:AbsBody)-instance-method" class="signature"><strong>#on_area</strong>(body : AbsBody)</a>
+        
+          <div class="summary"><p>Callback whenever bodies have their area changed by the system</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#on_collision(body:AbsBody,collisions:Array(AbsBody))-instance-method" class="signature"><strong>#on_collision</strong>(body : AbsBody, collisions : Array(AbsBody))</a>
+        
+          <div class="summary"><p>Callback whenever bodies collide with another body</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#on_delete(body:AbsBody)-instance-method" class="signature"><strong>#on_delete</strong>(body : AbsBody)</a>
+        
+          <div class="summary"><p>Callback whenever bodies are removed from the system</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#on_make(body:AbsBody)-instance-method" class="signature"><strong>#on_make</strong>(body : AbsBody)</a>
+        
+          <div class="summary"><p>Callback whenever bodies are made by the system</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#on_motion(body:AbsBody)-instance-method" class="signature"><strong>#on_motion</strong>(body : AbsBody)</a>
+        
+          <div class="summary"><p>Callback whenever bodies have thier position changed by the system</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#on_move(body:AbsBody,distance:Vector)-instance-method" class="signature"><strong>#on_move</strong>(body : AbsBody, distance : Vector)</a>
+        
+          <div class="summary"><p>Callback whenever bodies are moved by the system</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#on_moving(body:AbsBody)-instance-method" class="signature"><strong>#on_moving</strong>(body : AbsBody)</a>
+        
+          <div class="summary"><p>Callback for when a body starts moving</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#on_place(body:AbsBody)-instance-method" class="signature"><strong>#on_place</strong>(body : AbsBody)</a>
+        
+          <div class="summary"><p>Callback whenever bodies are placed by the system</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#on_step(body:AbsBody,delta)-instance-method" class="signature"><strong>#on_step</strong>(body : AbsBody, delta)</a>
+        
+          <div class="summary"><p>Callback when the simulation takes a step over a body.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#on_step_end(delta)-instance-method" class="signature"><strong>#on_step_end</strong>(delta)</a>
+        
+          <div class="summary"><p>Callback after the simulation takes a step.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#on_step_start(delta)-instance-method" class="signature"><strong>#on_step_start</strong>(delta)</a>
+        
+          <div class="summary"><p>Callback before the simulation takes a step.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#on_stop(body:AbsBody)-instance-method" class="signature"><strong>#on_stop</strong>(body : AbsBody)</a>
+        
+          <div class="summary"><p>Callback for when a body stops moving</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#on_turn(body:AbsBody)-instance-method" class="signature"><strong>#on_turn</strong>(body : AbsBody)</a>
+        
+          <div class="summary"><p>Callback for when a body changes direction</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#place(body:AbsBody,position:Vector)-instance-method" class="signature"><strong>#place</strong>(body : AbsBody, position : Vector)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#place(body:AbsBody,x,y)-instance-method" class="signature"><strong>#place</strong>(body : AbsBody, x, y)</a>
+        
+          <div class="summary"><p>Directly place a body at x, y Use this instead of body.place(x, y) to keep track of collision area</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#pointer:Rect-instance-method" class="signature"><strong>#pointer</strong> : Rect</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#pointer=(pointer:Rect)-instance-method" class="signature"><strong>#pointer=</strong>(pointer : Rect)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#space:Space-instance-method" class="signature"><strong>#space</strong> : Space</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#space=(space:Space)-instance-method" class="signature"><strong>#space=</strong>(space : Space)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#step(delta)-instance-method" class="signature"><strong>#step</strong>(delta)</a>
+        
+          <div class="summary"><p>Advances the simulation by delta steps</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#stop(body:AbsBody)-instance-method" class="signature"><strong>#stop</strong>(body : AbsBody)</a>
+        
+          <div class="summary"><p>Tells a body to not move when the system is proccessed.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#turn(body:AbsBody,direction:Vector)-instance-method" class="signature"><strong>#turn</strong>(body : AbsBody, direction : Vector)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#turn(body:AbsBody,x,y)-instance-method" class="signature"><strong>#turn</strong>(body : AbsBody, x, y)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#update_area(body:AbsBody)-instance-method" class="signature"><strong>#update_area</strong>(body : AbsBody)</a>
+        
+          <div class="summary"><p>Updates which collision area a body is in</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+  <h2>
+    <a id="constructor-detail" class="anchor" href="#constructor-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructor Detail
+  </h2>
+  
+    <div class="entry-detail" id="new(size)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(size)
+
+        <a class="method-permalink" href="#new(size)-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L14" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="actives:Array(Body)-instance-method">
+      <div class="signature">
+        
+        def <strong>actives</strong> : Array(<a href="Body.html">Body</a>)
+
+        <a class="method-permalink" href="#actives:Array(Body)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>All objects in the space</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="actives=(actives:Array(Body))-instance-method">
+      <div class="signature">
+        
+        def <strong>actives=</strong>(actives : Array(<a href="Body.html">Body</a>))
+
+        <a class="method-permalink" href="#actives=(actives:Array(Body))-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>All objects in the space</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="add(body:AbsBody)-instance-method">
+      <div class="signature">
+        
+        def <strong>add</strong>(body : <a href="AbsBody.html">AbsBody</a>)
+
+        <a class="method-permalink" href="#add(body:AbsBody)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Adds a body to the system.
+All bodies are tracked by id in list
+All bodies are tracked by area in space
+Bodies(Not StaticBodies) are added to a list of active bodies</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L59" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="delete(body)-instance-method">
+      <div class="signature">
+        
+        def <strong>delete</strong>(body)
+
+        <a class="method-permalink" href="#delete(body)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Removes a body from the system.
+Whatever the body was added to on add is cleaned up here.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L75" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="factory:Hash(Int32,AbsBody.class)-instance-method">
+      <div class="signature">
+        
+        def <strong>factory</strong> : Hash(Int32, <span class="t">AbsBody</span>.<span class="k">class</span>)
+
+        <a class="method-permalink" href="#factory:Hash(Int32,AbsBody.class)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L7" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="factory=(factory:Hash(Int32,AbsBody.class))-instance-method">
+      <div class="signature">
+        
+        def <strong>factory=</strong>(factory : Hash(Int32, <span class="t">AbsBody</span>.<span class="k">class</span>))
+
+        <a class="method-permalink" href="#factory=(factory:Hash(Int32,AbsBody.class))-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L7" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="find(x,y)-instance-method">
+      <div class="signature">
+        
+        def <strong>find</strong>(x, y)
+
+        <a class="method-permalink" href="#find(x,y)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L197" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="find(pos:Vector)-instance-method">
+      <div class="signature">
+        
+        def <strong>find</strong>(pos : <a href="Vector.html">Vector</a>)
+
+        <a class="method-permalink" href="#find(pos:Vector)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Gets a body in the space at x, y
+Uses a 1x1 pointer rect to test for collisions.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L187" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="get(id:Int32)-instance-method">
+      <div class="signature">
+        
+        def <strong>get</strong>(id : Int32)
+
+        <a class="method-permalink" href="#get(id:Int32)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L202" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="index:Index-instance-method">
+      <div class="signature">
+        
+        def <strong>index</strong> : <a href="Index.html">Index</a>
+
+        <a class="method-permalink" href="#index:Index-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L6" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="index=(index:Index)-instance-method">
+      <div class="signature">
+        
+        def <strong>index=</strong>(index : <a href="Index.html">Index</a>)
+
+        <a class="method-permalink" href="#index=(index:Index)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L6" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="list:Hash(Int32,AbsBody)-instance-method">
+      <div class="signature">
+        
+        def <strong>list</strong> : Hash(Int32, <a href="AbsBody.html">AbsBody</a>)
+
+        <a class="method-permalink" href="#list:Hash(Int32,AbsBody)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L8" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="list=(list:Hash(Int32,AbsBody))-instance-method">
+      <div class="signature">
+        
+        def <strong>list=</strong>(list : Hash(Int32, <a href="AbsBody.html">AbsBody</a>))
+
+        <a class="method-permalink" href="#list=(list:Hash(Int32,AbsBody))-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L8" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="make(type:AbsBody.class,id,position,direction=Vector.new(0,0))-instance-method">
+      <div class="signature">
+        
+        def <strong>make</strong>(type : <span class="t">AbsBody</span>.<span class="k">class</span>, id, position, direction = <span class="t">Vector</span>.<span class="k">new</span>(<span class="n">0</span>, <span class="n">0</span>))
+
+        <a class="method-permalink" href="#make(type:AbsBody.class,id,position,direction=Vector.new(0,0))-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Produces a body of type from the factory at position x, y
+If an id is not assigned during make, one will be generated. This is needed for syncing objects across clients and server
+After a body is made, it is automatically added to the system.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L27" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="make(key,id,position)-instance-method">
+      <div class="signature">
+        
+        def <strong>make</strong>(key, id, position)
+
+        <a class="method-permalink" href="#make(key,id,position)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L46" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="make(type:AbsBody.class,position)-instance-method">
+      <div class="signature">
+        
+        def <strong>make</strong>(type : <span class="t">AbsBody</span>.<span class="k">class</span>, position)
+
+        <a class="method-permalink" href="#make(type:AbsBody.class,position)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L35" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="make(key,position)-instance-method">
+      <div class="signature">
+        
+        def <strong>make</strong>(key, position)
+
+        <a class="method-permalink" href="#make(key,position)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L40" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="move(body:AbsBody,delta)-instance-method">
+      <div class="signature">
+        
+        def <strong>move</strong>(body : <a href="AbsBody.html">AbsBody</a>, delta)
+
+        <a class="method-permalink" href="#move(body:AbsBody,delta)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Move a body by it's speed and direction for delta duration.
+Use this instead of body.move(delta) to keep track of collision area</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L105" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="move(body:AbsBody,direction:Vector,delta)-instance-method">
+      <div class="signature">
+        
+        def <strong>move</strong>(body : <a href="AbsBody.html">AbsBody</a>, direction : <a href="Vector.html">Vector</a>, delta)
+
+        <a class="method-permalink" href="#move(body:AbsBody,direction:Vector,delta)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Move a body by it's speed in the direction of x, y for delta duration.
+Use this instead of body.move(x, y, delta) to keep track of collision area</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L114" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="move(body:AbsBody,x,y,delta)-instance-method">
+      <div class="signature">
+        
+        def <strong>move</strong>(body : <a href="AbsBody.html">AbsBody</a>, x, y, delta)
+
+        <a class="method-permalink" href="#move(body:AbsBody,x,y,delta)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L121" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="moving(body:AbsBody)-instance-method">
+      <div class="signature">
+        
+        def <strong>moving</strong>(body : <a href="AbsBody.html">AbsBody</a>)
+
+        <a class="method-permalink" href="#moving(body:AbsBody)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Tells a body to move when the system is processed.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L166" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="on_add(body:AbsBody)-instance-method">
+      <div class="signature">
+        
+        def <strong>on_add</strong>(body : <a href="AbsBody.html">AbsBody</a>)
+
+        <a class="method-permalink" href="#on_add(body:AbsBody)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Callback whenever bodies are added to the system</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L70" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="on_area(body:AbsBody)-instance-method">
+      <div class="signature">
+        
+        def <strong>on_area</strong>(body : <a href="AbsBody.html">AbsBody</a>)
+
+        <a class="method-permalink" href="#on_area(body:AbsBody)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Callback whenever bodies have their area changed by the system</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L100" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="on_collision(body:AbsBody,collisions:Array(AbsBody))-instance-method">
+      <div class="signature">
+        
+        def <strong>on_collision</strong>(body : <a href="AbsBody.html">AbsBody</a>, collisions : Array(<a href="AbsBody.html">AbsBody</a>))
+
+        <a class="method-permalink" href="#on_collision(body:AbsBody,collisions:Array(AbsBody))-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Callback whenever bodies collide with another body</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L241" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="on_delete(body:AbsBody)-instance-method">
+      <div class="signature">
+        
+        def <strong>on_delete</strong>(body : <a href="AbsBody.html">AbsBody</a>)
+
+        <a class="method-permalink" href="#on_delete(body:AbsBody)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Callback whenever bodies are removed from the system</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L85" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="on_make(body:AbsBody)-instance-method">
+      <div class="signature">
+        
+        def <strong>on_make</strong>(body : <a href="AbsBody.html">AbsBody</a>)
+
+        <a class="method-permalink" href="#on_make(body:AbsBody)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Callback whenever bodies are made by the system</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L52" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="on_motion(body:AbsBody)-instance-method">
+      <div class="signature">
+        
+        def <strong>on_motion</strong>(body : <a href="AbsBody.html">AbsBody</a>)
+
+        <a class="method-permalink" href="#on_motion(body:AbsBody)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Callback whenever bodies have thier position changed by the system</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L149" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="on_move(body:AbsBody,distance:Vector)-instance-method">
+      <div class="signature">
+        
+        def <strong>on_move</strong>(body : <a href="AbsBody.html">AbsBody</a>, distance : <a href="Vector.html">Vector</a>)
+
+        <a class="method-permalink" href="#on_move(body:AbsBody,distance:Vector)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Callback whenever bodies are moved by the system</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L127" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="on_moving(body:AbsBody)-instance-method">
+      <div class="signature">
+        
+        def <strong>on_moving</strong>(body : <a href="AbsBody.html">AbsBody</a>)
+
+        <a class="method-permalink" href="#on_moving(body:AbsBody)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Callback for when a body starts moving</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L172" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="on_place(body:AbsBody)-instance-method">
+      <div class="signature">
+        
+        def <strong>on_place</strong>(body : <a href="AbsBody.html">AbsBody</a>)
+
+        <a class="method-permalink" href="#on_place(body:AbsBody)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Callback whenever bodies are placed by the system</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L145" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="on_step(body:AbsBody,delta)-instance-method">
+      <div class="signature">
+        
+        def <strong>on_step</strong>(body : <a href="AbsBody.html">AbsBody</a>, delta)
+
+        <a class="method-permalink" href="#on_step(body:AbsBody,delta)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Callback when the simulation takes a step over a body. Override this when extending your Controller</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L237" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="on_step_end(delta)-instance-method">
+      <div class="signature">
+        
+        def <strong>on_step_end</strong>(delta)
+
+        <a class="method-permalink" href="#on_step_end(delta)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Callback after the simulation takes a step. Override this when extending your Controller</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L245" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="on_step_start(delta)-instance-method">
+      <div class="signature">
+        
+        def <strong>on_step_start</strong>(delta)
+
+        <a class="method-permalink" href="#on_step_start(delta)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Callback before the simulation takes a step. Override this when extending your Controller</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L233" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="on_stop(body:AbsBody)-instance-method">
+      <div class="signature">
+        
+        def <strong>on_stop</strong>(body : <a href="AbsBody.html">AbsBody</a>)
+
+        <a class="method-permalink" href="#on_stop(body:AbsBody)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Callback for when a body stops moving</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L182" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="on_turn(body:AbsBody)-instance-method">
+      <div class="signature">
+        
+        def <strong>on_turn</strong>(body : <a href="AbsBody.html">AbsBody</a>)
+
+        <a class="method-permalink" href="#on_turn(body:AbsBody)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Callback for when a body changes direction</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L162" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="place(body:AbsBody,position:Vector)-instance-method">
+      <div class="signature">
+        
+        def <strong>place</strong>(body : <a href="AbsBody.html">AbsBody</a>, position : <a href="Vector.html">Vector</a>)
+
+        <a class="method-permalink" href="#place(body:AbsBody,position:Vector)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L137" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="place(body:AbsBody,x,y)-instance-method">
+      <div class="signature">
+        
+        def <strong>place</strong>(body : <a href="AbsBody.html">AbsBody</a>, x, y)
+
+        <a class="method-permalink" href="#place(body:AbsBody,x,y)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Directly place a body at x, y
+Use this instead of body.place(x, y) to keep track of collision area</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L132" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="pointer:Rect-instance-method">
+      <div class="signature">
+        
+        def <strong>pointer</strong> : <a href="Rect.html">Rect</a>
+
+        <a class="method-permalink" href="#pointer:Rect-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L12" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="pointer=(pointer:Rect)-instance-method">
+      <div class="signature">
+        
+        def <strong>pointer=</strong>(pointer : <a href="Rect.html">Rect</a>)
+
+        <a class="method-permalink" href="#pointer=(pointer:Rect)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L12" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="space:Space-instance-method">
+      <div class="signature">
+        
+        def <strong>space</strong> : <a href="Space.html">Space</a>
+
+        <a class="method-permalink" href="#space:Space-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L10" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="space=(space:Space)-instance-method">
+      <div class="signature">
+        
+        def <strong>space=</strong>(space : <a href="Space.html">Space</a>)
+
+        <a class="method-permalink" href="#space=(space:Space)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L10" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="step(delta)-instance-method">
+      <div class="signature">
+        
+        def <strong>step</strong>(delta)
+
+        <a class="method-permalink" href="#step(delta)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Advances the simulation by delta steps</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L212" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="stop(body:AbsBody)-instance-method">
+      <div class="signature">
+        
+        def <strong>stop</strong>(body : <a href="AbsBody.html">AbsBody</a>)
+
+        <a class="method-permalink" href="#stop(body:AbsBody)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Tells a body to not move when the system is proccessed.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L176" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="turn(body:AbsBody,direction:Vector)-instance-method">
+      <div class="signature">
+        
+        def <strong>turn</strong>(body : <a href="AbsBody.html">AbsBody</a>, direction : <a href="Vector.html">Vector</a>)
+
+        <a class="method-permalink" href="#turn(body:AbsBody,direction:Vector)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L156" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="turn(body:AbsBody,x,y)-instance-method">
+      <div class="signature">
+        
+        def <strong>turn</strong>(body : <a href="AbsBody.html">AbsBody</a>, x, y)
+
+        <a class="method-permalink" href="#turn(body:AbsBody,x,y)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L152" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="update_area(body:AbsBody)-instance-method">
+      <div class="signature">
+        
+        def <strong>update_area</strong>(body : <a href="AbsBody.html">AbsBody</a>)
+
+        <a class="method-permalink" href="#update_area(body:AbsBody)-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Updates which collision area a body is in</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/controller.cr#L89" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>

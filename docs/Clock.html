@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.31.1">
+
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/doc.js"></script>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+
+  <meta id="repository-name" content="github.com/solidsmokesoftware/physicr">
+  <title>Clock - github.com/solidsmokesoftware/physicr</title>
+  <script type="text/javascript">
+    CrystalDoc.base_path = "";
+  </script>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="repository-links">
+      <a href="index.html">README</a>
+    </div>
+  </div>
+
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/AbsBody" data-name="absbody">
+      <a href="AbsBody.html">AbsBody</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/Body" data-name="body">
+      <a href="Body.html">Body</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/Circle" data-name="circle">
+      <a href="Circle.html">Circle</a>
+      
+    </li>
+  
+  <li class=" current" data-id="github.com/solidsmokesoftware/physicr/Clock" data-name="clock">
+      <a href="Clock.html">Clock</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/Collider" data-name="collider">
+      <a href="Collider.html">Collider</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/Controller" data-name="controller">
+      <a href="Controller.html">Controller</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/Index" data-name="index">
+      <a href="Index.html">Index</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/Rect" data-name="rect">
+      <a href="Rect.html">Rect</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/Shape" data-name="shape">
+      <a href="Shape.html">Shape</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/Space" data-name="space">
+      <a href="Space.html">Space</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/SpatialHash" data-name="spatialhash(t)">
+      <a href="SpatialHash.html">SpatialHash</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/StaticBody" data-name="staticbody">
+      <a href="StaticBody.html">StaticBody</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/Ticker" data-name="ticker">
+      <a href="Ticker.html">Ticker</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/Vector" data-name="vector">
+      <a href="Vector.html">Vector</a>
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">class</span> Clock
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="Clock.html">Clock</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
+
+
+  <h2>
+    <a id="overview" class="anchor" href="#overview">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Overview
+  </h2>
+
+  <p>Keeps track of time and handles ticking</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>
+    <a id="defined-in" class="anchor" href="#defined-in">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Defined in:
+  </h2>
+  
+    
+      <a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/clock.cr#L51" target="_blank">
+        clock.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+
+
+  <h2>
+    <a id="constructors" class="anchor" href="#constructors">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructors
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new(rate:Int64)-class-method" class="signature"><strong>.new</strong>(rate : Int64)</a>
+        
+          <div class="summary"><p>MS scale; 1000 = aprox 1 second</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new(rate:Int32)-class-method" class="signature"><strong>.new</strong>(rate : Int32)</a>
+        
+          <div class="summary"><p>MS scale; 1000 = aprox 1 second</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new(rate:Float64)-class-method" class="signature"><strong>.new</strong>(rate : Float64)</a>
+        
+          <div class="summary"><p>Second scale; 1 = aprox 1 second</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new(rate:Float32)-class-method" class="signature"><strong>.new</strong>(rate : Float32)</a>
+        
+          <div class="summary"><p>Second scale; 1 = aprox 1 second</p></div>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#calibrate-instance-method" class="signature"><strong>#calibrate</strong></a>
+        
+          <div class="summary"><p>Not implemented</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#rate:Int64-instance-method" class="signature"><strong>#rate</strong> : Int64</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#rate=(rate:Int64)-instance-method" class="signature"><strong>#rate=</strong>(rate : Int64)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#tick:Float64-instance-method" class="signature"><strong>#tick</strong> : Float64</a>
+        
+          <div class="summary"><p>Attemps to advance the system clock.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#tick_check:Bool-instance-method" class="signature"><strong>#tick_check</strong> : Bool</a>
+        
+          <div class="summary"><p>Attemps to advance the system clock.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#tick_time:Int64-instance-method" class="signature"><strong>#tick_time</strong> : Int64</a>
+        
+          <div class="summary"><p>Attemps to advance the system clock.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#ticker:Ticker-instance-method" class="signature"><strong>#ticker</strong> : Ticker</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#ticker=(ticker:Ticker)-instance-method" class="signature"><strong>#ticker=</strong>(ticker : Ticker)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#time:Int64-instance-method" class="signature"><strong>#time</strong> : Int64</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#time=(time:Int64)-instance-method" class="signature"><strong>#time=</strong>(time : Int64)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#value:Int64-instance-method" class="signature"><strong>#value</strong> : Int64</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#value=(value:Int64)-instance-method" class="signature"><strong>#value=</strong>(value : Int64)</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+  <h2>
+    <a id="constructor-detail" class="anchor" href="#constructor-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructor Detail
+  </h2>
+  
+    <div class="entry-detail" id="new(rate:Int64)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(rate : Int64)
+
+        <a class="method-permalink" href="#new(rate:Int64)-class-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>MS scale; 1000 = aprox 1 second</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/clock.cr#L61" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new(rate:Int32)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(rate : Int32)
+
+        <a class="method-permalink" href="#new(rate:Int32)-class-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>MS scale; 1000 = aprox 1 second</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/clock.cr#L69" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new(rate:Float64)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(rate : Float64)
+
+        <a class="method-permalink" href="#new(rate:Float64)-class-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Second scale; 1 = aprox 1 second</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/clock.cr#L77" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new(rate:Float32)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(rate : Float32)
+
+        <a class="method-permalink" href="#new(rate:Float32)-class-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Second scale; 1 = aprox 1 second</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/clock.cr#L85" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="calibrate-instance-method">
+      <div class="signature">
+        
+        def <strong>calibrate</strong>
+
+        <a class="method-permalink" href="#calibrate-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Not implemented</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/clock.cr#L93" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="rate:Int64-instance-method">
+      <div class="signature">
+        
+        def <strong>rate</strong> : Int64
+
+        <a class="method-permalink" href="#rate:Int64-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/clock.cr#L53" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="rate=(rate:Int64)-instance-method">
+      <div class="signature">
+        
+        def <strong>rate=</strong>(rate : Int64)
+
+        <a class="method-permalink" href="#rate=(rate:Int64)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/clock.cr#L53" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="tick:Float64-instance-method">
+      <div class="signature">
+        
+        def <strong>tick</strong> : Float64
+
+        <a class="method-permalink" href="#tick:Float64-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Attemps to advance the system clock. Returns delta if time changes, 0 if not
+Delta is the ratio of time that has passed since the tick. For example if your tick rate is 100ms, and your tick happens 150ms
+after your last tick, your delta will be 1.5
+You probably are going to want to use this one for timing in games</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/clock.cr#L101" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="tick_check:Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>tick_check</strong> : Bool
+
+        <a class="method-permalink" href="#tick_check:Bool-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Attemps to advance the system clock. Returns True if time changes, False if not</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/clock.cr#L125" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="tick_time:Int64-instance-method">
+      <div class="signature">
+        
+        def <strong>tick_time</strong> : Int64
+
+        <a class="method-permalink" href="#tick_time:Int64-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Attemps to advance the system clock. Returns the current system time</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/clock.cr#L114" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="ticker:Ticker-instance-method">
+      <div class="signature">
+        
+        def <strong>ticker</strong> : <a href="Ticker.html">Ticker</a>
+
+        <a class="method-permalink" href="#ticker:Ticker-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/clock.cr#L52" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="ticker=(ticker:Ticker)-instance-method">
+      <div class="signature">
+        
+        def <strong>ticker=</strong>(ticker : <a href="Ticker.html">Ticker</a>)
+
+        <a class="method-permalink" href="#ticker=(ticker:Ticker)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/clock.cr#L52" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="time:Int64-instance-method">
+      <div class="signature">
+        
+        def <strong>time</strong> : Int64
+
+        <a class="method-permalink" href="#time:Int64-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/clock.cr#L55" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="time=(time:Int64)-instance-method">
+      <div class="signature">
+        
+        def <strong>time=</strong>(time : Int64)
+
+        <a class="method-permalink" href="#time=(time:Int64)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/clock.cr#L55" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="value:Int64-instance-method">
+      <div class="signature">
+        
+        def <strong>value</strong> : Int64
+
+        <a class="method-permalink" href="#value:Int64-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/clock.cr#L54" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="value=(value:Int64)-instance-method">
+      <div class="signature">
+        
+        def <strong>value=</strong>(value : Int64)
+
+        <a class="method-permalink" href="#value=(value:Int64)-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/clock.cr#L54" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>

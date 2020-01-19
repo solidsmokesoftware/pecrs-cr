@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.31.1">
+
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/doc.js"></script>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+
+  <meta id="repository-name" content="github.com/solidsmokesoftware/physicr">
+  <title>Shape - github.com/solidsmokesoftware/physicr</title>
+  <script type="text/javascript">
+    CrystalDoc.base_path = "";
+  </script>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="repository-links">
+      <a href="index.html">README</a>
+    </div>
+  </div>
+
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/AbsBody" data-name="absbody">
+      <a href="AbsBody.html">AbsBody</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/Body" data-name="body">
+      <a href="Body.html">Body</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/Circle" data-name="circle">
+      <a href="Circle.html">Circle</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/Clock" data-name="clock">
+      <a href="Clock.html">Clock</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/Collider" data-name="collider">
+      <a href="Collider.html">Collider</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/Controller" data-name="controller">
+      <a href="Controller.html">Controller</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/Index" data-name="index">
+      <a href="Index.html">Index</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/Rect" data-name="rect">
+      <a href="Rect.html">Rect</a>
+      
+    </li>
+  
+  <li class=" current" data-id="github.com/solidsmokesoftware/physicr/Shape" data-name="shape">
+      <a href="Shape.html">Shape</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/Space" data-name="space">
+      <a href="Space.html">Space</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/SpatialHash" data-name="spatialhash(t)">
+      <a href="SpatialHash.html">SpatialHash</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/StaticBody" data-name="staticbody">
+      <a href="StaticBody.html">StaticBody</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/Ticker" data-name="ticker">
+      <a href="Ticker.html">Ticker</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/Vector" data-name="vector">
+      <a href="Vector.html">Vector</a>
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">abstract struct</span> Shape
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="Shape.html">Shape</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
+
+
+
+
+  <h2>
+    <a id="overview" class="anchor" href="#overview">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Overview
+  </h2>
+
+  <p>Abstract Base Shape that other shapes extend from.
+Shapes are simple data structures that describe the physical properties of an body to a Collider.
+Note that shapes do not have a position, thus all bodies with the same shape can use the same Shape instance</p>
+
+
+
+
+
+
+
+
+
+  <h2>
+    <a id="direct-known-subclasses" class="anchor" href="#direct-known-subclasses">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Direct Known Subclasses
+  </h2>
+  <ul class="other-types-list">
+    
+      <li class="other-type"><a href="Circle.html">Circle</a></li>
+    
+      <li class="other-type"><a href="Rect.html">Rect</a></li>
+    
+  </ul>
+
+
+
+
+
+
+  <h2>
+    <a id="defined-in" class="anchor" href="#defined-in">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Defined in:
+  </h2>
+  
+    
+      <a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/shape.cr#L4" target="_blank">
+        shape.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+
+
+  <h2>
+    <a id="constructors" class="anchor" href="#constructors">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructors
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new-class-method" class="signature"><strong>.new</strong></a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+  <h2>
+    <a id="constructor-detail" class="anchor" href="#constructor-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructor Detail
+  </h2>
+  
+    <div class="entry-detail" id="new-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>
+
+        <a class="method-permalink" href="#new-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/solidsmokesoftware/physicr/blob/61c837ac5c59b296fe2abcd59f9aaf440856402d/src/shape.cr#L4" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+
+
+
+
+</div>
+
+</body>
+</html>

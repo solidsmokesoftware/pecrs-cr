@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.31.1">
+
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/doc.js"></script>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+
+  <meta id="repository-name" content="github.com/solidsmokesoftware/physicr">
+  <title>README - github.com/solidsmokesoftware/physicr</title>
+  <script type="text/javascript">
+  CrystalDoc.base_path = "";
+  </script>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="repository-links">
+      <a href="index.html">README</a>
+    </div>
+  </div>
+
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/AbsBody" data-name="absbody">
+      <a href="AbsBody.html">AbsBody</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/Body" data-name="body">
+      <a href="Body.html">Body</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/Circle" data-name="circle">
+      <a href="Circle.html">Circle</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/Clock" data-name="clock">
+      <a href="Clock.html">Clock</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/Collider" data-name="collider">
+      <a href="Collider.html">Collider</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/Controller" data-name="controller">
+      <a href="Controller.html">Controller</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/Index" data-name="index">
+      <a href="Index.html">Index</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/Rect" data-name="rect">
+      <a href="Rect.html">Rect</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/Shape" data-name="shape">
+      <a href="Shape.html">Shape</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/Space" data-name="space">
+      <a href="Space.html">Space</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/SpatialHash" data-name="spatialhash(t)">
+      <a href="SpatialHash.html">SpatialHash</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/StaticBody" data-name="staticbody">
+      <a href="StaticBody.html">StaticBody</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/Ticker" data-name="ticker">
+      <a href="Ticker.html">Ticker</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/solidsmokesoftware/physicr/Vector" data-name="vector">
+      <a href="Vector.html">Vector</a>
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1><a id="physicr" class="anchor" href="#physicr">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Physicr</h1>
+
+<p>Physicr is 2D physics system with a focus on simplicity written in Crystal.</p>
+
+<p>Physicr is easy to use and intuitive, featuring a high level controller for managing the system.</p>
+
+<p>Physicr is a <em>system</em> not an <em>engine</em>. It is powered by your game loop and fully under your control.</p>
+
+<p>Physicr is object-oriented and highly extensible, utilizing callbacks for easy access for system functions.</p>
+
+<p>Physicr is multiplayer ready. Being developed alongside a networked game, Physicr is intended to be used in online gaming.</p>
+
+<h1><a id="example" class="anchor" href="#example">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Example</h1>
+
+<pre><code class="language-ruby">require "./controller"
+require "./body"
+require "./shape"
+
+
+class Player &lt; Body
+  def initialize(id, position)
+    shape = Rect.new 32, 32
+    super id, position, shape
+    @name = "Player"
+    @speed = 100
+    @moving = true
+  end
+end
+
+
+class Objects &lt; Controller
+  def initalize(collision_area_size)
+    super collision_area_size
+    @factory[0] = Player.class
+  end
+      
+  def on_make(body)
+    puts "Objects made #{body.name} #{body.id} at #{body.position.x}:#{body.position.y}")
+  end
+      
+  def on_motion(body)
+    puts "#{body.name} #{body.id} is at #{body.position.x}:#{body.position.y}"
+  end
+
+  def on_collision(body, collisions)
+    put "#{body.name} is colliding with #{collisions.size} others"
+  end
+
+objects = Objects 64
+
+playerA = objects.make Player, 0, 0
+playerB = objects.make 0, 10, 0
+
+collision = objects.space.check playerA, playerB
+if collision
+   puts "Bodies A and B are colliding"
+end
+
+objects.place playerA, 100, 0
+objects.move playerB, 1, 0, 1
+
+objects.turn playerA, 0, 1
+objects.move playerA, 1
+
+collision = objects.space.check playerA 
+if collision
+   puts "Body A is colliding with another body"
+end
+
+objects.delete playerA 
+objects.delete playerB
+
+playerC = objects.make Player, 0, 0, dx=1 
+playerD = objects.make Player, 0, 0, dx=-1 
+playerE = objects.make Player, 0, 0, dy =1 
+playerF = objects.make Player, 0, 0, dy =-1 
+
+collisions = objects.space.get_body playerC
+if collisions
+   puts "Body C is colliding with #{collisions.size} others"
+end
+
+10.times do
+   objects.step 0.1
+end
+</code></pre>
+
+<h1><a id="documentation" class="anchor" href="#documentation">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Documentation</h1>
+
+<p>Physicr's documentation is incomplete. See the documentation at pysics for a more indepth autodoc</p>
+
+<p>https://solidsmokesoftware.github.io/pysics/</p>
+
+<h1><a id="demonstration" class="anchor" href="#demonstration">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Demonstration</h1>
+
+<p>Physicr's has a twin written in Python. To see the system in action, check out</p>
+
+<p>https://github.com/solidsmokesoftware/solconomy</p>
+
+<p><img src="https://camo.githubusercontent.com/de20b3b2014d20a8746f7346e777e323586d5a35/68747470733a2f2f692e696d6775722e636f6d2f566277677664372e706e67" alt="solconomy"/></p>
+</div>
+</body>
+</html>
