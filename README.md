@@ -88,9 +88,7 @@ end
 
 # Documentation
 
-Physicr's documentation is incomplete. See the documentation at pysics for a more indepth autodoc
-
-https://solidsmokesoftware.github.io/pysics/
+https://solidsmokesoftware.github.io/physicr/
 
 # Demonstration
 
